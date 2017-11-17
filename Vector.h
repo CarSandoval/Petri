@@ -9,17 +9,20 @@ class vector
     public:
         vector();
         vector(int* value, int n);
-        void set(int i);
-        void get(int i);
+        void set(int i, int value);
+        int get(int i);
         int size();
         ~vector();
 
-        vector& operator =(const vector &v1);
+        void operator =(const vector &v1);
         vector& operator *(const vector &v1);
         vector& operator +(const vector &v1);
         vector& operator -(const vector &v1);
-        vector& operator +=(const vector &v1);
-        vector& operator -=(const vector &v1);
+        void operator +=(const vector &v1);
+        void operator -=(const vector &v1);
+
+	bool operator >=(const vector &v1);
+	bool operator >(const vector &v1);
 
 
 };

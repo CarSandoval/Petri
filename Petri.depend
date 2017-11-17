@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1510804059 source:/home/diego/gitHub/Petri/Petri/main.cpp
-	<iostream>
-	"Vector.h"
-
-1510804501 /home/diego/gitHub/Petri/Petri/Vector.h
-

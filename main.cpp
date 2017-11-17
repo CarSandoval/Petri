@@ -5,6 +5,7 @@ using namespace std;
 
 int main()
 {
-    cout << "Hello world!" << endl;
+    vector a ;
+
     return 0;
 }
