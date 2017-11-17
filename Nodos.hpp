@@ -11,18 +11,24 @@ class Nodo
 {
 	bool mayorizado;
 	Nodo *padre;
-	std::vector<Nodo> hijos;
-	vector::vector marcado;
-	static std::map<vector::vector,*Nodo> nodos_creados;
+	std::map<vector,*Nodo> hijos;
+	vector marcado;
+	static std::map<vector,*Nodo> nodos_creados;
 	static int nodos;
 
 public:
 	Nodo();
-	Nodo(int size_p, vector::vector marcado_init);
+	Nodo(int size_p, vector marcado_init);
 	Nodo(Nodo *padre);
-	void nuevo_hijo(vector::vector marcado_init);
+	bool nuevo_hijo(vector marcado_init);
 	void mayorizar();
 	bool mayorizado();
+	static int nodos();
+	Nodo *padre();
+	Nodo *hijo(vector marcado0);
+	std::map<vector, *Nodo> map; hijos();
+	static bool existe();
+	vector marcado();
 	~Nodo();
 
 }
