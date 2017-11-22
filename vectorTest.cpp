@@ -11,7 +11,8 @@ int main()
 
 	//prueba de igualdad
 	a = new vector(aux,3);
-	b = new vector(aux2,3);
+	aux[0]=2; aux[1]=3; aux[2]=4;
+	b = new vector(aux,2);
 
 	cout<<a.get(0)<<","<<a.get(1)<<","<<a.get(2)<<endl;
 	cout<<b.get(0)<<","<<b.get(1)<<","<<b.get(2)<<endl;
@@ -58,7 +59,16 @@ int main()
 	
 	d = new vector(1,3);
 	cout<<d.get(0)<<","<<d.get(1)<<","<<d.get(2)<<endl;
- 
+
+	//prueba con arreglos
+	cout<<"prueba con arreglos:::::::::"<<endl;
+ 	vector* listVec;
+	listVec = new vector[2];
+	listVec[0] = new vector(aux, 3);
+	aux[0]=2; aux[1]=3; aux[2]=4;
+	listVec[1] = new vector(aux,3);
+	cout<<listVec[0].get(0)<<","<<listVec[0].get(1)<<","<<listVec[0].get(2)<<endl;
+	cout<<listVec[1].get(0)<<","<<listVec[1].get(1)<<","<<listVec[1].get(2)<<endl;
 
 	return 0;
 }
