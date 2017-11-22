@@ -54,6 +54,23 @@ void vector::operator=(const vector &v1)
 	}
 }
 
+void vector::operator=(vector* v1)
+{
+	delete []data;
+	tamano = v1->tamano;
+	data = v1->data;
+	//data = new int[tamano];
+	
+	/*
+	for(int i=0;i<tamano;i++)
+	{
+		data[i]=v1->data[i];
+	}
+	*/
+}
+
+
+
 vector& vector::operator*(const vector &v1)
 {
 

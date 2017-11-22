@@ -15,6 +15,7 @@ class vector
         ~vector();
 
         void operator =(const vector &v1);
+	void operator =(vector* v1);
         vector& operator *(const vector &v1);
         vector& operator +(const vector &v1);
         vector& operator -(const vector &v1);
@@ -26,6 +27,7 @@ class vector
 
 
 };
+
 
 //Test!!
 
