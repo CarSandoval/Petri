@@ -118,7 +118,7 @@ void vector::operator-=(const vector &v1)
 
 ///::::::::::::::condiciones de mayorizacion
 
-bool operator >=(const vector &v1)
+bool vector::operator >=(const vector &v1)
 {
 	for(int i=0;i<tamano;i++)
 	{
@@ -130,7 +130,7 @@ bool operator >=(const vector &v1)
 	return true;
 }
 
-bool operator >(const vector &v1)
+bool vector::operator >(const vector &v1)
 {
 	for(int i=0;i<tamano;i++)
 	{
