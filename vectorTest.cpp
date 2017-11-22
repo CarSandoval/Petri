@@ -42,7 +42,10 @@ int main()
 	cout<<c.get(0)<<","<<c.get(1)<<","<<c.get(2)<<endl;
 
 	//pruebas de mayorizacion
-	
+	cout<<(a<b)<<endl;
+	cout<<(a>b)<<endl;
+	cout<<(a<=b)<<endl;
+	cout<<(a>=b)<<endl;
 
 	//impresiones de los vectores finales
 	cout<<"vectores finales"<<endl;
