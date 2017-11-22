@@ -1,6 +1,8 @@
 #include "Vector.h"
 #include <iostream>
 
+
+//:::::::::constructores
 vector::vector()
 {
     tamano = 0;
@@ -17,6 +19,8 @@ vector::vector(int* value, int n)
     }
 }
 
+
+//:::::::set, Get and Size
 void vector::set(int i, int value)
 {
     data[i]=value;
@@ -32,12 +36,13 @@ int vector::size()
  return tamano;
 }
 
-
+//:::::::::::::descturctor
 vector::~vector()
 {
     delete[] data;
 }
 
+//:::::::::::::operadores escenciales
 void vector::operator=(const vector &v1)
 {
 	delete []data;
@@ -88,6 +93,9 @@ vector& vector::operator-(const vector &v1)
 	return *resp;
 }
 
+
+//::::::::::::::::operadores extras
+
 void vector::operator+=(const vector &v1)
 {
 
@@ -108,15 +116,31 @@ void vector::operator-=(const vector &v1)
 
 }
 
+///::::::::::::::condiciones de mayorizacion
+
 bool operator >=(const vector &v1)
 {
-	return false;
 	for(int i=0;i<tamano;i++)
 	{
-
+		if(data[i]<v1.data[i])
+		{
+			return false;
+		}	
 	}
+	return true;
 }
 
+bool operator >(const vector &v1)
+{
+	for(int i=0;i<tamano;i++)
+	{
+		if(data[i]<=v1.data[i])
+		{
+			return false;
+		}	
+	}
+	return true;
+}
 
 
 
