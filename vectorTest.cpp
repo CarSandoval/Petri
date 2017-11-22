@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-	vector a,b,c;
+	vector a,b,c,d;
 	int aux[] = {1,2,3};
 	int aux2[] = {2,3,4};
 
@@ -53,10 +53,11 @@ int main()
 	cout<<b.get(0)<<","<<b.get(1)<<","<<b.get(2)<<endl;
 	cout<<c.get(0)<<","<<c.get(1)<<","<<c.get(2)<<endl;
 
-	
-	
-		
 
+	//prueba de construccion de vector 1	
+	
+	d = new vector(1,3);
+	cout<<d.get(0)<<","<<d.get(1)<<","<<d.get(2)<<endl;
  
 
 	return 0;

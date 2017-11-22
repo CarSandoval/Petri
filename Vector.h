@@ -9,6 +9,7 @@ class vector
     public:
         vector();
         vector(int* value, int n);
+	vector(int n, int tam);
         void set(int i, int value);
         int get(int i);
         int size();

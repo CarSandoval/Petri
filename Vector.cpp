@@ -19,6 +19,17 @@ vector::vector(int* value, int n)
     }
 }
 
+vector::vector(int n, int tam)
+{
+	tamano = tam;
+	data = new int[tamano];
+	for(int i=0;i<tamano;i++)
+	{
+		data[i]=0;
+	}
+	data[n] = 1;
+}
+
 
 //:::::::set, Get and Size
 void vector::set(int i, int value)
