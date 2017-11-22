@@ -6,16 +6,21 @@ Nodo::Nodo()
 	padre = NULL;
 	marcado = MARCADO_CERO;
 	nodos = 0;
+	max_disparo = 1;
 
 }
 
-Nodo::Nodo(int size_p, vector marcado_init)
+Nodo::Nodo(int max_disparo0, vector marcado_init)
 {
+	int ceros[max_disparo0] = {0};
 	mayorizado = false;
 	padre = NULL;
 	marcado = marcado_init;
 	nodos = 1;
 	nodos_creados[marcado_init] = this;
+	disparos = new vector(ceros,max_disparo0);
+	for(int i=0;i<max_disparo0;i++)
+		hijos[i]=NULL;
 
 }
 
@@ -28,12 +33,9 @@ Nodo::Nodo(Nodo *padre0, vector marcado0)
 	nodos_creados[marcado0] = this;
 }
 
-
-
-bool Nodo::nuevo_hijo(vector marcado_init)
+bool Nodo::nuevo_hijo(Nodo *nuevo_hijo0, int disparo)
 {
-	Nodo *nuevo_nodo = new Nodo(this, marcado_init);
-	!existe ? hijos[nuevo_nodo.marcado] = nuevo_nodo : return false;
+	disparo<max_disparo ? hijos[disparo] = nuevo_nodo :return false;
 	return true;
 }
 
@@ -45,6 +47,14 @@ void Nodo::mayorizar()
 bool Nodo::mayorizado()
 {
 	return mayorizado;
+}
+
+vector Nodo::getDisparos()
+{
+	for(int i=0; i<disparos.size(); i++)
+		hijos[i]==NULL ? disparos.set(i,0) : disparos.set(i,1);
+	return disparos;
+
 }
 
 static int Nodo::nodos()
@@ -59,17 +69,12 @@ Nodo *Nodo::padre()
 
 Nodo *Nodo::hijo(vector marcado0)
 {
-	return hijos[marcado]
+	return hijos[marcado0]
 }
 
-std::map<vector, *Nodo> Nodo::hijo()
+std::vector<*Nodo> Nodo::hijo()
 {
 	return hijos;
-}
-
-bool Nodo::existe()
-{
-	return hijos.find(marcado)!=hijos.end();
 }
 
 vector Nodo::marcado()
