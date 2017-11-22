@@ -24,6 +24,10 @@ class vector
 
 	bool operator >=(const vector &v1);
 	bool operator >(const vector &v1);
+	bool operator <=(const vector &v1);
+	bool operator <(const vector &v1);
+	bool operator ==(const vector &v1);
+	
 
 
 };

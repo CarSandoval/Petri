@@ -159,6 +159,44 @@ bool vector::operator >(const vector &v1)
 	return true;
 }
 
+bool vector::operator <=(const vector &v1)
+{
+	for(int i=0;i<tamano;i++)
+	{
+		if(data[i]>v1.data[i])
+		{
+			return false;
+		}	
+	}
+	return true;
+}
+
+bool vector::operator <(const vector &v1)
+{
+	for(int i=0;i<tamano;i++)
+	{
+		if(data[i]>=v1.data[i])
+		{
+			return false;
+		}	
+	}
+	return true;
+}
+
+bool vector::operator ==(const vector &v1)
+{
+	for(int i=0;i<tamano;i++)
+	{
+		if(data[i]!=v1.data[i])
+		{
+			return false;
+		}	
+	}
+	return true;
+}
+
+
+
 
 
 

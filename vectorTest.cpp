@@ -41,6 +41,9 @@ int main()
 	c -= a;
 	cout<<c.get(0)<<","<<c.get(1)<<","<<c.get(2)<<endl;
 
+	//pruebas de mayorizacion
+	
+
 	//impresiones de los vectores finales
 	cout<<"vectores finales"<<endl;
 	cout<<a.get(0)<<","<<a.get(1)<<","<<a.get(2)<<endl;
@@ -48,7 +51,7 @@ int main()
 	cout<<c.get(0)<<","<<c.get(1)<<","<<c.get(2)<<endl;
 
 	
-
+	
 		
 
  
