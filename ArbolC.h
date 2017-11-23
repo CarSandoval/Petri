@@ -11,7 +11,7 @@ class arbol
         //int tamano;
         
     public:
-        Nodo raiz;
+        Nodo* raiz;
         int n;
         vector* pre;
         vector* post;
@@ -23,6 +23,9 @@ class arbol
         //void get(int i);
         //int size();
         ~arbol();
+
+	bool reiniciableAux(Nodo* aux);
+	bool reiniciable();
 
 };
 
