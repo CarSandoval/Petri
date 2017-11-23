@@ -6,7 +6,7 @@
 #ifndef NODO_HPP_INCLUDED
 #define NODO_HPP_INCLUDED
 
-#define MARCADO_CERO new vector();
+#define MARCADO_CERO new vector()
 
 
 class Nodo
@@ -17,9 +17,10 @@ class Nodo
 	std::vector<Nodo*> hijos;
 	vector disparos;
 	vector marcado;
-	static std::map<vector,bool> nodos_creados;
+	static std::map<vector,bool> nodos_creados;//(first.begin(),first.end());
 	static int nodos;
 	static int max_disparo;
+	static std::map<vector,bool> init_nodos_creados();
 
 public:
 	Nodo();
@@ -44,6 +45,7 @@ public:
 	~Nodo();
 
 };
+
 
 
 

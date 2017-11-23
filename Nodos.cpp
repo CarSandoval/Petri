@@ -1,5 +1,18 @@
 #include "Nodos.hpp"
 
+std::map<vector,bool> Nodo::init_nodos_creados()
+{
+	std::map<vector,bool> aux;
+	vector vec_aux;
+	aux[vec_aux] = false;
+	return aux;
+}
+
+std::map<vector,bool> Nodo::nodos_creados = init_nodos_creados();
+int Nodo::nodos = 0;
+int Nodo::max_disparo = 0;
+
+
 Nodo::Nodo()
 {
 	mayorizado = false;
