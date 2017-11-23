@@ -11,6 +11,16 @@ Nodo::Nodo()
 
 }
 
+Nodo::Nodo(vector marcado0)
+{
+	mayorizado = false;
+	ciclo = false;
+	padre = NULL;
+	marcado = marcado0;
+	nodos++;
+	nodos_creados[marcado0] = false;
+}
+
 Nodo::Nodo(int max_disparo0, vector marcado_init)
 {
 	int ceros[max_disparo0] = {0};
@@ -19,7 +29,7 @@ Nodo::Nodo(int max_disparo0, vector marcado_init)
 	ciclo = false;
 	marcado = marcado_init;
 	nodos = 1;
-	nodos_creados[marcado_init] = this;
+	nodos_creados[marcado_init] = false;
 	disparos = new vector(ceros,max_disparo0);
 	for(int i=0;i<max_disparo0;i++)
 		hijos[i]=NULL;
@@ -33,7 +43,7 @@ Nodo::Nodo(Nodo *padre0, vector marcado0)
 	padre = padre0;
 	marcado = marcado0;
 	nodos++;
-	nodos_creados[marcado0] = this;
+	nodos_creados[marcado0] = false;
 }
 
 bool Nodo::nuevo_hijo(Nodo *nuevo_hijo0, int disparo)
@@ -47,6 +57,11 @@ bool Nodo::nuevo_hijo(Nodo *nuevo_hijo0, int disparo)
 	{
 	    return false;
 	}
+}
+
+void setPadre(Nodo *padre0)
+{
+	padre = padre0;
 }
 
 void setCiclo(bool ciclo0)
@@ -100,4 +115,14 @@ std::vector<Nodo*> Nodo::getHijos()
 vector Nodo::getMarcado()
 {
 	return marcado;
+}
+
+void setNodosCiclo(vector marcado0, bool ciclo0)
+{
+	nodos_creados[marcado0] = ciclo0;
+}
+
+bool getNodosCiclo(vector marcado0)
+{
+	return nodos_creados[marcado0]
 }

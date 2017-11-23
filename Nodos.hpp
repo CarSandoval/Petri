@@ -17,12 +17,13 @@ class Nodo
 	std::vector<Nodo*> hijos;
 	vector disparos;
 	vector marcado;
-	static std::map<vector,Nodo*> nodos_creados;
+	static std::map<vector,bool> nodos_creados;
 	static int nodos;
 	static int max_disparo;
 
 public:
 	Nodo();
+	Nodo(vector marcado0);
 	Nodo(int max_disparo0, vector marcado_init);
 	Nodo(Nodo *padre, vector marcado0);
 	bool nuevo_hijo(Nodo *nuevo_hijo0, int disparo);
@@ -33,6 +34,7 @@ public:
 	vector getDisparos();
 	static int getNodos();
 	Nodo *getPadre();
+	void setPadre(Nodo *padre0);
 	Nodo *hijo(int disparo0);
 	std::vector<Nodo*> getHijos();
 	static bool existe();
