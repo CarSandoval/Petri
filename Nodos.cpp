@@ -7,6 +7,7 @@ Nodo::Nodo()
 	marcado = MARCADO_CERO;
 	nodos = 0;
 	max_disparo = 1;
+	ciclo = false;
 
 }
 
@@ -15,6 +16,7 @@ Nodo::Nodo(int max_disparo0, vector marcado_init)
 	int ceros[max_disparo0] = {0};
 	mayorizado = false;
 	padre = NULL;
+	ciclo = false;
 	marcado = marcado_init;
 	nodos = 1;
 	nodos_creados[marcado_init] = this;
@@ -27,6 +29,7 @@ Nodo::Nodo(int max_disparo0, vector marcado_init)
 Nodo::Nodo(Nodo *padre0, vector marcado0)
 {
 	mayorizado = false;
+	ciclo = false;
 	padre = padre0;
 	marcado = marcado0;
 	nodos++;
@@ -44,6 +47,16 @@ bool Nodo::nuevo_hijo(Nodo *nuevo_hijo0, int disparo)
 	{
 	    return false;
 	}
+}
+
+void setCiclo(bool ciclo0)
+{
+	ciclo = ciclo0;
+}
+
+bool getCiclo()
+{
+	return ciclo;
 }
 
 void Nodo::mayorizar()

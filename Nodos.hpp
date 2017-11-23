@@ -12,6 +12,7 @@
 class Nodo
 {
 	bool mayorizado;
+	bool ciclo;
 	Nodo *padre;
 	std::vector<Nodo*> hijos;
 	vector disparos;
@@ -25,6 +26,8 @@ public:
 	Nodo(int max_disparo0, vector marcado_init);
 	Nodo(Nodo *padre, vector marcado0);
 	bool nuevo_hijo(Nodo *nuevo_hijo0, int disparo);
+	void setCiclo(bool ciclo0);
+	bool getCiclo();
 	void mayorizar();
 	bool getMayorizado();
 	vector getDisparos();
