@@ -117,12 +117,12 @@ vector Nodo::getMarcado()
 	return marcado;
 }
 
-void setNodosCiclo(vector marcado0, bool ciclo0)
+void setExplorado(vector marcado0, bool ciclo0)
 {
 	nodos_creados[marcado0] = ciclo0;
 }
 
-bool getNodosCiclo(vector marcado0)
+bool getExplorado(vector marcado0)
 {
 	return nodos_creados[marcado0]
 }
