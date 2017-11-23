@@ -59,17 +59,17 @@ bool Nodo::nuevo_hijo(Nodo *nuevo_hijo0, int disparo)
 	}
 }
 
-void setPadre(Nodo *padre0)
+void Nodo::setPadre(Nodo *padre0)
 {
-	padre = padre0;
+	this->padre = padre0;
 }
 
-void setCiclo(bool ciclo0)
+void Nodo::setCiclo(bool ciclo0)
 {
 	ciclo = ciclo0;
 }
 
-bool getCiclo()
+bool Nodo::getCiclo()
 {
 	return ciclo;
 }
@@ -117,12 +117,12 @@ vector Nodo::getMarcado()
 	return marcado;
 }
 
-void setExplorado(vector marcado0, bool ciclo0)
+void Nodo::setExplorado(vector marcado0, bool ciclo0)
 {
 	nodos_creados[marcado0] = ciclo0;
 }
 
-bool getExplorado(vector marcado0)
+bool Nodo::getExplorado(vector marcado0)
 {
-	return nodos_creados[marcado0]
+	return nodos_creados[marcado0];
 }

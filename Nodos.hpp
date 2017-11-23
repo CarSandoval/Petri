@@ -39,7 +39,7 @@ public:
 	std::vector<Nodo*> getHijos();
 	static bool existe();
 	vector getMarcado();
-	void getExplorado(vector marcado0);
+	bool getExplorado(vector marcado0);
 	void setExplorado(vector marcado0, bool ciclo0);
 	~Nodo();
 
