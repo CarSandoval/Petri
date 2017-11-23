@@ -1,7 +1,8 @@
 #ifndef ARBOL_H_INCLUDED
 #define ARBOL_H_INCLUDED
 #include "Vector.h"
-//#include "Nodos.hpp"
+
+#include "Nodos.hpp"
 
 class arbol
 {
@@ -10,10 +11,11 @@ class arbol
         //int tamano;
         
     public:
-        //nodo raiz;
+        Nodo raiz;
         int n;
         vector* pre;
         vector* post;
+        vector marcadoI;
         
         arbol();
         arbol(int* marcado, int t, int p);

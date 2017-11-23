@@ -1,8 +1,8 @@
 #include <iostream>
 #include "Arbol.h"
-//#include "nodo.h"
+//#include "Nodo.h"
 #include "Vector.h"
-
+//#include "Oraculo.h"
 
 arbol::arbol()
 {
@@ -18,6 +18,12 @@ arbol::arbol(int* marcado, int t, int p)
     vector v2;
     pre = new vector[t];
     post = new vector[t];
+
+    //Vector con marcado inicial
+    marcadoI = new vector(marcado,p);
+
+    //Nodo Padre
+    raiz = new Nodo(t,marcadoI);
 
     // Creación de arreglo de vectores PRE
     for (int i = 0; i < t; ++i)
@@ -45,7 +51,7 @@ arbol::arbol(int* marcado, int t, int p)
 
 
     //std::cout << "Size: "<< pre->size()<< std::endl;
-    for (int i = 0; i < p; ++i)
+    /*for (int i = 0; i < p; ++i)
     {
         for (int j = 0; j < t; ++j)
         {
@@ -64,7 +70,8 @@ arbol::arbol(int* marcado, int t, int p)
         }
         std::cout  << std::endl;
         
-    }
+    }*/
+
 
 	/*vector* pre;
     vector* post;
