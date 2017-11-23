@@ -14,10 +14,12 @@ arbol::arbol(int* marcado, int t, int p)
 	
 	n=t;
     int* aux = new int[p];
-    vector vaux;
+    vector v1;
+    vector v2;
+    pre = new vector[t];
+    post = new vector[t];
 
-    pre = new vector();
-
+    // Creación de arreglo de vectores PRE
     for (int i = 0; i < t; ++i)
     {
         std::cout << "Pre T " << i;
@@ -25,14 +27,43 @@ arbol::arbol(int* marcado, int t, int p)
         {
             std::cin >> aux[j];
         }
-        vaux= new vector(aux,p);
-        pre = &vaux;
+        v1=new vector(aux,p);
+        pre[i]=v1;
+    }
+
+    // Creación de arreglo de vectores POST
+    for (int i = 0; i < t; ++i)
+    {
+        std::cout << "Post T " << i;
+        for (int j = 0; j < p; ++j)
+        {
+            std::cin >> aux[j];
+        }
+        v2=new vector(aux,p);
+        post[i]=v2;
     }
 
 
-    for (int i = 0; i < pre->size(); ++i)
+    //std::cout << "Size: "<< pre->size()<< std::endl;
+    for (int i = 0; i < p; ++i)
     {
-        std::cout << pre->size();
+        for (int j = 0; j < t; ++j)
+        {
+           std::cout << pre[j].get(i); 
+        }
+        std::cout  << std::endl;
+        
+    }
+
+    std::cout << std::endl;
+    for (int i = 0; i < p; ++i)
+    {
+        for (int j = 0; j < t; ++j)
+        {
+           std::cout << post[j].get(i); 
+        }
+        std::cout  << std::endl;
+        
     }
 
 	/*vector* pre;
@@ -42,7 +73,9 @@ arbol::arbol(int* marcado, int t, int p)
     pre = new vector;
 
     delete post;
-    delete pre;*/
+    */
+    //delete pre;
+    //delete post;
 }
 
 arbol::~arbol()
