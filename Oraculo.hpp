@@ -8,7 +8,8 @@
 class Oraculo
 {
 	bool acotado;
-	std::map<vector, Nodo*> nodos_existentes;
+	std::map<vector, Nodo*> nodos;
+	vector max;
 
 public:
 	Oraculo(vector max0);
