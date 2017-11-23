@@ -1,29 +1,33 @@
 #include <iostream>
 #include "Arbol.h"
-//#include "Nodo.h"
-#include "Vector.h"
+#include "Nodos.hpp"
+//#include "Vector.h"
 //#include "Oraculo.h"
 
 arbol::arbol()
 {
 	n=0;
+    m=0;
+    reverse_flag = true;
 }
 
 arbol::arbol(int* marcado, int t, int p)
 {
-	
+	//Transiciones
 	n=t;
+
+    //Lugares
+    m=p;
     int* aux = new int[p];
-    vector v1;
-    vector v2;
     pre = new vector[t];
     post = new vector[t];
+    reverse_flag = true;
 
     //Vector con marcado inicial
-    marcadoI = new vector(marcado,p);
+    marcadoI = new vector(marcado,p); 
 
     //Nodo Padre
-    raiz = new Nodo(t,marcadoI);
+    //raiz = new Nodo(t,marcadoI);
 
     // Creación de arreglo de vectores PRE
     for (int i = 0; i < t; ++i)
@@ -33,8 +37,7 @@ arbol::arbol(int* marcado, int t, int p)
         {
             std::cin >> aux[j];
         }
-        v1=new vector(aux,p);
-        pre[i]=v1;
+        pre[i]=new vector(aux,p);
     }
 
     // Creación de arreglo de vectores POST
@@ -45,9 +48,11 @@ arbol::arbol(int* marcado, int t, int p)
         {
             std::cin >> aux[j];
         }
-        v2=new vector(aux,p);
-        post[i]=v2;
+        post[i]=new vector(aux,p);
     }
+
+    //check_t(raiz);
+    check_t(marcadoI);
 
 
     //std::cout << "Size: "<< pre->size()<< std::endl;
@@ -72,15 +77,6 @@ arbol::arbol(int* marcado, int t, int p)
         
     }*/
 
-
-	/*vector* pre;
-    vector* post;
-
-    post = new vector;
-    pre = new vector;
-
-    delete post;
-    */
     //delete pre;
     //delete post;
 }
@@ -88,4 +84,72 @@ arbol::arbol(int* marcado, int t, int p)
 arbol::~arbol()
 {
     
+}
+
+arbol::check_t(/*Nodo* nodo*/ vector marcado){
+    int aux=1;
+    //Marcado tipo vector auxiliar
+    vector marcado_aux;
+    //vector marcado =  nodo->getMarcado();
+    for (int i = 0; i < n; ++i)
+    {
+        marcado_aux = marcado;
+        aux=1;
+        for (int j = 0; j < m; ++j)
+        {
+            //Hay un valor en pre para el lugar "i"
+            if (pre[i].get(j)>0)
+            {
+                //Encuentra el caso en el que no se puede activar alguna T
+                //if (pre[i].get(j)>marcado.get(j))
+                if (pre[i].get(j)>marcado.get(j))
+                {
+                    aux=0;
+                    break;
+                }
+            }
+        }
+        //Verifica si se puede disparar la transición "i"
+        if (aux==1)
+        {
+            std::cout << "T" << i <<": Activa" << std::endl;
+            //Calcula el nuevo etiquetado al activarse la transición "i"
+            marcado_aux -= pre[i];
+            marcado_aux += post[i];
+            std::cout << "Marcado T" << i <<": " ;
+            for (int k = 0; k < m; ++k)
+            {
+                std::cout << marcado_aux.get(k);
+            }
+            std::cout << std::endl;
+        }
+        //No se pudo activar la transición "i"
+        else{
+            std::cout << "T" << i <<": No activa" << std::endl;
+        }
+    }
+
+/*
+    int aux=1;
+    for (int i = 0; i < n; ++i)
+    {
+        aux=1;
+        for (int j = 0; j < m; ++j)
+        {
+            if (pre[i].get(j)>0)
+            {
+                if (pre[i].get(j)>marcado.get(j))
+                {
+                    aux=0;
+                    break;
+                }
+            }
+        }
+        if (aux==1)
+        {
+            std::cout << "T" << i <<": Activa" << std::endl;
+        }else{
+            std::cout << "T" << i <<": No activa" << std::endl;
+        }
+    }*/
 }
