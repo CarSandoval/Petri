@@ -6,11 +6,23 @@
 
 bool arbol::reiniciableAux(Nodo* aux)
 {
-	
+	//para saber si sigue siendo verdad
+	static bool bandera = true;
+
+	//para saber si sigo teniendo posibilidad de reiniciabilidad
+	if(!bandera)
+	{
+		return false;
+	}
+
 	for(int i=0;i<(this->n);i++)
 	{
+		//variable para hijo temporal		
+		Nodo* hijo;		
+		
 		//marco explorado el nodo	
 		aux->setExplorado(aux->getMarcado(),true);
+		
 
 		//si no tengo hijo i
 		if((aux->getHijos())[i]==NULL)
@@ -18,15 +30,18 @@ bool arbol::reiniciableAux(Nodo* aux)
 			continue;
 		}
 
+		//obtengo el hijo correspondiente y lo asigno a hijo
+		hijo = (aux->getHijos())[i];
+
 		//si mi hijo tiene solucion y lo sabe, yo tengo solucion
-		if(((aux->getHijos())[i])->getCiclo() || ((aux->getHijos())[i])->getMarcado()==raiz->getMarcado())
+		if(hijo->getCiclo() || hijo->getMarcado()==raiz->getMarcado())
 		{
 			aux->setCiclo(true);
 			return true;
 		}
 
 		//si ya habia explorado a mi hijo
-		if(aux->getExplorado(((aux->getHijos())[i])->getMarcado()))
+		if(aux->getExplorado(hijo->getMarcado()))
 		{
 			continue;
 		}
@@ -39,6 +54,8 @@ bool arbol::reiniciableAux(Nodo* aux)
 		}
 		
 	}
+	//si no tengo posibilidades de vivacidad
+	bandera = false;
 	return false;
 }
 
