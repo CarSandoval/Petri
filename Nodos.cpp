@@ -35,8 +35,15 @@ Nodo::Nodo(Nodo *padre0, vector marcado0)
 
 bool Nodo::nuevo_hijo(Nodo *nuevo_hijo0, int disparo)
 {
-	disparo<max_disparo ? hijos[disparo] = nuevo_nodo :return false;
-	return true;
+	if(disparo<max_disparo)
+	{
+	    hijos[disparo] = nuevo_hijo0;
+	    return true;
+	}
+	else
+	{
+	    return false;
+	}
 }
 
 void Nodo::mayorizar()
@@ -44,7 +51,7 @@ void Nodo::mayorizar()
 	mayorizado = true;
 }
 
-bool Nodo::mayorizado()
+bool Nodo::getMayorizado()
 {
 	return mayorizado;
 }
@@ -57,27 +64,27 @@ vector Nodo::getDisparos()
 
 }
 
-static int Nodo::nodos()
+int Nodo::getNodos()
 {
 	return nodos;
 }
 
-Nodo *Nodo::padre()
+Nodo *Nodo::getPadre()
 {
 	return padre;
 }
 
-Nodo *Nodo::hijo(vector marcado0)
+Nodo *Nodo::hijo(int disparo0)
 {
-	return hijos[marcado0]
+	return hijos[disparo0];
 }
 
-std::vector<*Nodo> Nodo::hijo()
+std::vector<Nodo*> Nodo::getHijos()
 {
 	return hijos;
 }
 
-vector Nodo::marcado()
+vector Nodo::getMarcado()
 {
 	return marcado;
 }
