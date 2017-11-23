@@ -1,8 +1,53 @@
 #include <iostream>
-#include "Arbol.h"
+#include "ArbolC.h"
 //#include "Nodo.h"
 #include "Vector.h"
 //#include "Oraculo.h"
+
+bool arbol::reiniciableAux(Nodo* aux)
+{
+	
+	for(int i=0;i<(this->n);i++)
+	{
+		//marco explorado el nodo	
+		aux->setExplorado(aux->getMarcado(),true);
+
+		//si no tengo hijo i
+		if((aux->getHijos())[i]==NULL)
+		{
+			continue;
+		}
+
+		//si mi hijo tiene solucion y lo sabe, yo tengo solucion
+		if(((aux->getHijos())[i])->getCiclo() || ((aux->getHijos())[i])->getMarcado()==raiz->getMarcado())
+		{
+			aux->setCiclo(true);
+			return true;
+		}
+
+		//si ya habia explorado a mi hijo
+		if(aux->getExplorado(((aux->getHijos())[i])->getMarcado()))
+		{
+			continue;
+		}
+
+		//sino exploro a mi hijo
+		if(reiniciableAux((aux->getHijos())[i]))
+		{
+			aux->setCiclo(true);
+			return true;			
+		}
+		
+	}
+	return false;
+}
+
+bool arbol::reiniciable()
+{
+	reiniciableAux(raiz);
+}
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 arbol::arbol()
 {

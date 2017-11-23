@@ -2,20 +2,20 @@
 #define ARBOL_H_INCLUDED
 #include "Vector.h"
 
-#include "Nodos.hpp"
+//#include "Nodos.hpp"
 
 class arbol
 {
     private:
-        //int* data;
-        //int tamano;
+        bool reverse_flag;
         
     public:
-        Nodo raiz;
-        int n;
+        //Nodo* raiz;
+        int n,m;
         vector* pre;
         vector* post;
         vector marcadoI;
+        vector max;
         
         arbol();
         arbol(int* marcado, int t, int p);
@@ -23,6 +23,7 @@ class arbol
         //void get(int i);
         //int size();
         ~arbol();
+        check_t(vector marcado);
 
 };
 
