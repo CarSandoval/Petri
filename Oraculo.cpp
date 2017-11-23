@@ -3,15 +3,22 @@
 Oraculo::Oraculo(vector max0)
 {
 	max = max0;
-	acotado = false;
+	acotado = true;
 }
 
 Nodo *Oraculo::consulta(vector marcado0)
 {
+	std::map<vector, Nodo*>::iterator i;
+	for (i = nodos.begin(); i != nodos.end(); ++i)
+	{
+		if(marcado0 >= i->first)
+		{
+			acotado = false;
+		}
+	}
 	if(marcado0 >= max)
 	{
 		vector aux = marcado0;
-		std::map<vector, Nodo*>::iterator i;
 		for (i = nodos.begin(); i != nodos.end(); ++i)
 		{
 			if(i->first < aux && i->first > max)
