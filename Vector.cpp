@@ -206,6 +206,70 @@ bool vector::operator ==(const vector &v1)
 	return true;
 }
 
+//::::::::::::operadores agenos a la clase::::::::::::
+
+
+bool operator >=(const vector &v0, const vector &v1)
+{
+	for(int i=0;i<v0.tamano;i++)
+	{
+		if(v0.data[i]<v1.data[i])
+		{
+			return false;
+		}	
+	}
+	return true;
+}
+
+bool operator >(const vector &v0, const vector &v1)
+{
+	for(int i=0;i<v0.tamano;i++)
+	{
+		if(v0.data[i]<=v1.data[i])
+		{
+			return false;
+		}	
+	}
+	return true;
+}
+
+bool operator <=(const vector &v0, const vector &v1)
+{
+	for(int i=0;i<v0.tamano;i++)
+	{
+		if(v0.data[i]>v1.data[i])
+		{
+			return false;
+		}	
+	}
+	return true;
+}
+
+bool operator <(const vector &v0, const vector &v1)
+{
+	for(int i=0;i<v0.tamano;i++)
+	{
+		if(v0.data[i]>=v1.data[i])
+		{
+			return false;
+		}	
+	}
+	return true;
+}
+
+
+bool operator ==(const vector &v0, const vector &v1)
+{
+	for(int i=0;i<v0.tamano;i++)
+	{
+		if(v0.data[i]!=v1.data[i])
+		{
+			return false;
+		}	
+	}
+	return true;
+}
+
 
 
 

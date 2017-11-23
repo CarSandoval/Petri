@@ -3,10 +3,10 @@
 
 class vector
 {
-    private:
+    public:
         int* data;
         int tamano;
-    public:
+    
         vector();
         vector(int* value, int n);
 	vector(int n, int tam);
@@ -28,10 +28,13 @@ class vector
 	bool operator <=(const vector &v1);
 	bool operator <(const vector &v1);
 	bool operator ==(const vector &v1);
-	
-
-
 };
+
+bool operator >=(const vector &v0, const vector &v1);
+bool operator >(const vector &v0, const vector &v1);
+bool operator <=(const vector &v0, const vector &v1);
+bool operator <(const vector &v0, const vector &v1);
+bool operator ==(const vector &v0, const vector &v1);
 
 
 //Test!!
