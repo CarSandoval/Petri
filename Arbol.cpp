@@ -8,7 +8,6 @@ arbol::arbol()
 {
 	n=0;
     m=0;
-    reverse_flag = true;
 }
 
 arbol::arbol(int* marcado, int t, int p)
@@ -21,14 +20,14 @@ arbol::arbol(int* marcado, int t, int p)
     int* aux = new int[p];
     pre = new vector[t];
     post = new vector[t];
-    reverse_flag = true;
 
     //Vector con marcado inicial
     marcadoI = new vector(marcado,p); 
 
     //Nodo Padre
-    //raiz = new Nodo(t,marcadoI);
-
+    std::cout << "Aqui nodos";
+    raiz = new Nodo(t,marcadoI);
+    std::cout << "Aqui nodos";
     // Creación de arreglo de vectores PRE
     for (int i = 0; i < t; ++i)
     {
@@ -51,8 +50,8 @@ arbol::arbol(int* marcado, int t, int p)
         post[i]=new vector(aux,p);
     }
 
-    //check_t(raiz);
-    check_t(marcadoI);
+    check_t(raiz);
+    //check_t(marcadoI);
 
 
     //std::cout << "Size: "<< pre->size()<< std::endl;
@@ -86,14 +85,14 @@ arbol::~arbol()
     
 }
 
-arbol::check_t(/*Nodo* nodo*/ vector marcado){
+arbol::check_t(Nodo* nodo){
     int aux=1;
     //Marcado tipo vector auxiliar
     vector marcado_aux;
     //vector marcado =  nodo->getMarcado();
     for (int i = 0; i < n; ++i)
     {
-        marcado_aux = marcado;
+        marcado_aux = nodo->getMarcado();
         aux=1;
         for (int j = 0; j < m; ++j)
         {
@@ -102,7 +101,7 @@ arbol::check_t(/*Nodo* nodo*/ vector marcado){
             {
                 //Encuentra el caso en el que no se puede activar alguna T
                 //if (pre[i].get(j)>marcado.get(j))
-                if (pre[i].get(j)>marcado.get(j))
+                if (pre[i].get(j)>marcado_aux.get(j))
                 {
                     aux=0;
                     break;
@@ -128,28 +127,51 @@ arbol::check_t(/*Nodo* nodo*/ vector marcado){
             std::cout << "T" << i <<": No activa" << std::endl;
         }
     }
+}
+
 
 /*
+arbol::check_t(vector marcado){
+    std::cout << std::endl << std::endl << "MARCADO Nuevo"<<std::endl ;
     int aux=1;
+    //Marcado tipo vector auxiliar
+    vector marcado_aux;
+    //vector marcado =  nodo->getMarcado();
     for (int i = 0; i < n; ++i)
     {
+        marcado_aux = marcado;
         aux=1;
         for (int j = 0; j < m; ++j)
         {
+            //Hay un valor en pre para el lugar "i"
             if (pre[i].get(j)>0)
             {
-                if (pre[i].get(j)>marcado.get(j))
+                //Encuentra el caso en el que no se puede activar alguna T
+                if (pre[i].get(j)>marcado_aux.get(j))
                 {
                     aux=0;
                     break;
                 }
             }
         }
+        //Verifica si se puede disparar la transición "i"
         if (aux==1)
         {
             std::cout << "T" << i <<": Activa" << std::endl;
-        }else{
-            std::cout << "T" << i <<": No activa" << std::endl;
+            //Calcula el nuevo etiquetado al activarse la transición "i"
+            marcado_aux -= pre[i];
+            marcado_aux += post[i];
+            std::cout << "Marcado T" << i <<": " ;
+            for (int k = 0; k < m; ++k)
+            {
+                std::cout << marcado_aux.get(k);
+            }
+            std::cout << std::endl;
+            check_t(marcado_aux);
         }
-    }*/
-}
+        //No se pudo activar la transición "i"
+        else{
+            //std::cout << "T" << i <<": No activa" << std::endl;
+        }
+    }
+}*/
