@@ -50,7 +50,7 @@ int vector::size()
 //:::::::::::::descturctor
 vector::~vector()
 {
-    delete[] data;
+    //delete[] data;
 }
 
 //:::::::::::::operadores escenciales
