@@ -3,9 +3,17 @@
 
 using namespace std;
 
+vector regresa()
+{
+	static vector resp = *(new vector(2,3));
+	//static vector resp;
+	//resp = new vector(2,3);
+	return resp;
+}
+
 int main()
 {
-	vector a,b,c,d;
+	vector a,b,c,d,e,f,g;
 	int aux[] = {1,2,3};
 	int aux2[] = {2,3,4};
 
@@ -70,5 +78,19 @@ int main()
 	cout<<listVec[0].get(0)<<","<<listVec[0].get(1)<<","<<listVec[0].get(2)<<endl;
 	cout<<listVec[1].get(0)<<","<<listVec[1].get(1)<<","<<listVec[1].get(2)<<endl;
 
+	//copia de copia;
+	cout<<"puebas extensivasl del igual"<<endl;
+	int aux4[] = {3,4,5};
+	int aux5[] = {6,7,8};
+	b = new vector(aux4,3);
+	b = new vector(aux5,3);
+	b = regresa();
+	cout<<b.get(0)<<","<<b.get(1)<<","<<b.get(2)<<endl;
+	a = regresa();
+	cout<<a.get(0)<<","<<a.get(1)<<","<<a.get(2)<<endl;
+	e = regresa();
+	cout<<e.get(0)<<","<<e.get(1)<<","<<e.get(2)<<endl;
+	f = a;
+	cout<<f.get(0)<<","<<f.get(1)<<","<<f.get(2)<<endl;
 	return 0;
 }
