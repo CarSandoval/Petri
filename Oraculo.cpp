@@ -1,16 +1,46 @@
 #include "Oraculo.hpp"
 
-Oraculo::Oraculo(vector max0, int max_disparos0)
+Oraculo::Oraculo(vector max0, int max_disparos0, int maximus0)
 {
 	max = max0;
 	acotado = true;
 	max_disparos = max_disparos0;
+	maximus = maximus0
 }
 
-Nodo *Oraculo::consulta(vector marcado0, bool *repetido)
+Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 {
 	*repetido = false;
 	std::vector<_Nodos>::iterator i;
+	Nodo* aux_padre;
+
+
+
+	//******************************************************
+	while(padre->getMarcado() != max)
+	{
+		if(marcado0 >= padre->getMarcado())
+		{
+			for(int j=0;j<marcado0.size();j++)
+			{
+				if(marcado0.get(j)>maximus)
+				{
+					return padre;
+				}
+			}
+		}
+		padre = padre->padre;
+	}
+	Nodo *nuevo = new Nodo(max_disparos,marcado0);
+	_Nodos nodo_nuevo;
+	nodo_nuevo.VECTOR = marcado0;
+	nodo_nuevo.NODO = nuevo;
+	nodos.push_back(nodo_nuevo);
+	return nuevo;
+	//*********************************************************
+
+
+
 	for (i = nodos.begin(); i != nodos.end(); ++i)
 	{
 		if(marcado0 >= i->VECTOR)
@@ -82,7 +112,7 @@ bool Oraculo::exist(vector marcado0)
 	return false;
 }
 
-Nodo* Oraculo:find(vector marcado0)
+Nodo* Oraculo::find(vector marcado0)
 {
 	std::vector<_Nodos>::iterator i;
 

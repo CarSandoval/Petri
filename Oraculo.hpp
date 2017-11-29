@@ -17,15 +17,17 @@ class Oraculo
 		vector nodos_vector;
 		Nodo *nodos_nodo;
 	};
+
 	std::vector<_Nodos> nodos;
 	vector max;
+	int maximus;
 	int max_disparos;
 	bool exist(vector marcado0);
 
 public:
-	Oraculo(vector max0, int max_disparos0);
+	Oraculo(vector max0, int max_disparos0, int maximus0);
 	~Oraculo();
-	Nodo *consulta(vector marcado0, bool *repetido);
+	Nodo *consulta(vector marcado0, Nodo *padre, bool *repetido);
 	bool getAcotado();
 };
 
