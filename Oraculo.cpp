@@ -17,19 +17,22 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 
 
 	//******************************************************
-	while(!(padre->getMarcado() == max))
+	if(padre!=NULL)
 	{
-		if(marcado0 >= padre->getMarcado())
+		while(!(padre->getMarcado() == max))
 		{
-			for(int j=0;j<marcado0.size();j++)
+			if(marcado0 >= padre->getMarcado())
 			{
-				if(marcado0.get(j)>maximus)
+				for(int j=0;j<marcado0.size();j++)
 				{
-					return padre;
+					if(marcado0.get(j)>maximus)
+					{
+						return padre;
+					}
 				}
 			}
+			padre = padre->getPadre();
 		}
-		padre = padre->getPadre();
 	}
 	Nodo *nuevo = new Nodo(max_disparos,marcado0);
 	_Nodos nodo_nuevo;
