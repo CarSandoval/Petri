@@ -2,7 +2,7 @@
 #define ORACULO_HPP_INCLUDED
 
 #include <map>
-#include "vector.h"
+#include "Vector.h"
 #include "Nodos.hpp"
 #define VECTOR nodos_vector
 #define NODO nodos_nodo
@@ -23,14 +23,14 @@ class Oraculo
 	int maximus;
 	int max_disparos;
 	bool exist(vector marcado0);
+	Nodo *find(vector marcado0);
 
 public:
 	Oraculo(vector max0, int max_disparos0, int maximus0);
 	~Oraculo();
 	Nodo *consulta(vector marcado0, Nodo *padre, bool *repetido);
 	bool getAcotado();
-	bool exist(vector marcado0);
-	Nodo *find(vector marcado0);
+	
 };
 
 #endif

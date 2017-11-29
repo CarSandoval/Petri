@@ -5,7 +5,7 @@ Oraculo::Oraculo(vector max0, int max_disparos0, int maximus0)
 	max = max0;
 	acotado = true;
 	max_disparos = max_disparos0;
-	maximus = maximus0
+	maximus = maximus0;
 }
 
 Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
@@ -17,7 +17,7 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 
 
 	//******************************************************
-	while(padre->getMarcado() != max)
+	while(!(padre->getMarcado() == max))
 	{
 		if(marcado0 >= padre->getMarcado())
 		{
@@ -29,7 +29,7 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 				}
 			}
 		}
-		padre = padre->padre;
+		padre = padre->getPadre();
 	}
 	Nodo *nuevo = new Nodo(max_disparos,marcado0);
 	_Nodos nodo_nuevo;
