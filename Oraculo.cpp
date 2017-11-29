@@ -29,7 +29,10 @@ Nodo *Oraculo::consulta(vector marcado0, bool *repetido)
 			}
 		}
 		if(nodos.find(aux)!=nodos.end())
+		{
+			*repetido = true;
 			return nodos[aux];
+		}
 		else
 		{
 			Nodo *nuevo = new Nodo(max_disparos,aux);
