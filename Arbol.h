@@ -1,12 +1,18 @@
 #ifndef ARBOL_H_INCLUDED
 #define ARBOL_H_INCLUDED
 #include "Vector.h"
-
+#include "Oraculo.hpp"
 #include "Nodos.hpp"
 
 class arbol
 {
     private:
+        vector marcado_aux;
+        vector maximo;
+        Oraculo* direccion;
+        bool repetido;
+        int val_max;
+
         
     public:
         Nodo* raiz;
@@ -23,7 +29,8 @@ class arbol
         //int size();
         ~arbol();
         //check_t(vector marcado);
-        check_t(Nodo* nodo);
+        void check_t(Nodo* nodo);
+        //void prueba(Nodo* arr[]);
 
 };
 

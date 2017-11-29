@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Arbol.h"
-#include "Nodos.hpp"
+//#include "Nodos.hpp"
 //#include "Vector.h"
 //#include "Oraculo.h"
 
@@ -12,12 +12,20 @@ arbol::arbol()
 
 arbol::arbol(int* marcado, int t, int p)
 {
+    //Hijos pendientes
+    //Nodo* arr_hijos[n];
+
 	//Transiciones
 	n=t;
 
     //Lugares
     m=p;
+    
     int* aux = new int[p];
+
+    //Arreglo auxiliar para calcular el marcado maximo
+    int arr_max[m] = {0};  
+
     pre = new vector[t];
     post = new vector[t];
 
@@ -25,9 +33,11 @@ arbol::arbol(int* marcado, int t, int p)
     marcadoI = new vector(marcado,p); 
 
     //Nodo Padre
-    std::cout << "Aqui nodos";
-    raiz = new Nodo(t,marcadoI);
-    std::cout << "Aqui nodos";
+    //raiz = new Nodo(t,marcadoI);
+    
+
+    
+    //std::cout << "Aqui nodos";
     // Creación de arreglo de vectores PRE
     for (int i = 0; i < t; ++i)
     {
@@ -50,34 +60,77 @@ arbol::arbol(int* marcado, int t, int p)
         post[i]=new vector(aux,p);
     }
 
-    check_t(raiz);
-    //check_t(marcadoI);
-
-
-    //std::cout << "Size: "<< pre->size()<< std::endl;
-    /*for (int i = 0; i < p; ++i)
+    //Obtener marcado maximo del arreglo pre
+    for (int i = 0; i < m; ++i)
     {
-        for (int j = 0; j < t; ++j)
+        //arr_max[i] = pre[i].get(0);
+        for (int j = 0; j < n; ++j)
         {
-           std::cout << pre[j].get(i); 
+            if (pre[j].get(i)>arr_max[i])
+            {
+                arr_max[i] = pre[j].get(i) + 1;
+            }
         }
-        std::cout  << std::endl;
-        
     }
 
-    std::cout << std::endl;
-    for (int i = 0; i < p; ++i)
-    {
-        for (int j = 0; j < t; ++j)
-        {
-           std::cout << post[j].get(i); 
-        }
-        std::cout  << std::endl;
-        
-    }*/
 
-    //delete pre;
-    //delete post;
+    //Vector con los valores maximos
+    maximo = new vector(arr_max,m);
+
+    //Obtiene el entero maximo de pre, el valor maximo que puede tener un place
+    val_max=0;
+    for (int i = 0; i < m; ++i)
+    {
+        if (arr_max[i] > val_max)
+        {
+            val_max=arr_max[i];
+        }
+    }
+
+
+
+    direccion = new Oraculo(marcadoI,t, val_max);
+
+    raiz = direccion->consulta(marcadoI, NULL, &repetido);
+        //std::cout << "Bandera" << std::endl;
+    std::cout << "Marcado Maximo: " << val_max;
+            //marcado2 = raiz->getMarcado();
+            /*for (int k = 0; k < m; ++k)
+            {
+                std::cout << maximo.get(k);
+            }*/
+            std::cout << std::endl;
+
+/*
+    std::cout << "Marcado Maximo: " ;
+            marcado2 = raiz->getMarcado();
+            for (int k = 0; k < m; ++k)
+            {
+                std::cout << marcado2.get(k);
+            }
+            std::cout << std::endl;*/
+
+
+    //int arr[m]={0};
+    //marcado_aux = new vector(arr, m);
+    vector marcado3;
+
+    /*for (int i = 0; i < m; ++i)
+    {
+        std::cout<<"Marcado aux: " << marcado_aux.get(i);
+    }
+    std::cout<<std::endl;*/
+
+    std::cout << "Marcado inicial Nodo: " ;
+            marcado3 = raiz->getMarcado();
+            for (int k = 0; k < m; ++k)
+            {
+                std::cout << marcado3.get(k);
+            }
+            std::cout << std::endl;
+
+    check_t(raiz);
+
 }
 
 arbol::~arbol()
@@ -85,32 +138,97 @@ arbol::~arbol()
     
 }
 
-arbol::check_t(Nodo* nodo){
-    int aux=1;
+void arbol::check_t(Nodo* nodo){
+
     //Marcado tipo vector auxiliar
-    vector marcado_aux;
+    marcado_aux = nodo->getMarcado();
+
+    //arr_hijos = new Nodo[n];
+/*
+    std::cout << "Marcado inicial Nodo: " ;
+    marcado3 = nodo->getMarcado();
+    for (int k = 1; k < m; ++k)
+        {
+            std::cout << marcado3.get(k);
+        }
+    std::cout << std::endl;
+*/  
+
+    //int aux=1;
+
     //vector marcado =  nodo->getMarcado();
     for (int i = 0; i < n; ++i)
     {
         marcado_aux = nodo->getMarcado();
-        aux=1;
+        if (pre[i]<=marcado_aux)
+        {
+            std::cout << "T" << i <<": Activa" << std::endl;
+            //Calcula el nuevo etiquetado al activarse la transición "i"
+            marcado_aux -= pre[i];
+            marcado_aux += post[i];
+            std::cout << "Marcado T" << i <<": " ;
+            for (int k = 0; k < m; ++k)
+            {
+                std::cout << marcado_aux.get(k)<<",";
+            }
+            std::cout << std::endl;
+            
+            repetido = false;
+            Nodo* hijo = direccion->consulta(marcado_aux,nodo,&repetido);
+            
+            std::cout << "Hasta aqui" << std::endl;
+            if (repetido)
+            {
+                nodo->setHijo(hijo,i);
+                std::cout << "T" << i <<": Repetido" << std::endl;
+            }else{
+                //arr_hijos[i] = hijo;
+                hijo->setPadre(nodo);
+                nodo->setHijo(hijo,i);
+                std::cout << "Hasta aqui2" << std::endl;
+                std::cout << "Padre e hijo relacionados " << i << std::endl ;
+                
+                check_t(hijo);
+                
+            }
+        }
+        
+        //No se pudo activar la transición "i"
+        else{
+            std::cout << "T" << i <<": No activa" << std::endl;
+
+        }
+        //prueba(arr_hijos);
+        marcado_aux = nodo->getMarcado();
+    }
+}
+/*
+void arbol::prueba(Nodo* arr[]){
+    for (int i = 0; i < n; ++i)
+    {
+    }
+    //prueba();
+}*/
+
+//aux=1;
+        /*
         for (int j = 0; j < m; ++j)
         {
             //Hay un valor en pre para el lugar "i"
             if (pre[i].get(j)>0)
             {
                 //Encuentra el caso en el que no se puede activar alguna T
-                //if (pre[i].get(j)>marcado.get(j))
                 if (pre[i].get(j)>marcado_aux.get(j))
                 {
                     aux=0;
                     break;
                 }
             }
-        }
+        }*/
         //Verifica si se puede disparar la transición "i"
-        if (aux==1)
+        /*if (aux==1)
         {
+
             std::cout << "T" << i <<": Activa" << std::endl;
             //Calcula el nuevo etiquetado al activarse la transición "i"
             marcado_aux -= pre[i];
@@ -121,13 +239,26 @@ arbol::check_t(Nodo* nodo){
                 std::cout << marcado_aux.get(k);
             }
             std::cout << std::endl;
-        }
-        //No se pudo activar la transición "i"
-        else{
-            std::cout << "T" << i <<": No activa" << std::endl;
-        }
-    }
-}
+            std::cout << "Hasta aqui" << std::endl;
+            Nodo* hijo = direccion->consulta(marcado_aux,&repetido);
+
+            if (repetido)
+            {
+                nodo->setHijo(hijo,i);
+                std::cout << "T" << i <<": Reetido" << std::endl;
+                return;
+            }else{
+
+                hijo->setPadre(nodo);
+
+                nodo->setHijo(hijo,i);
+                std::cout << "Hasta aqui2" << std::endl;
+                std::cout << "Padre e hijo relacionados " << i << std::endl ;
+                marcado_aux = nodo->getMarcado();
+
+                check_t(hijo);
+            }
+        }*/
 
 
 /*
