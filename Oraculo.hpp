@@ -4,8 +4,8 @@
 #include <map>
 #include "vector.h"
 #include "Nodos.hpp"
-#define NODO nodos_vector
-#define VECTOR nodos_nodo
+#define VECTOR nodos_vector
+#define NODO nodos_nodo
 
 class Oraculo
 {
