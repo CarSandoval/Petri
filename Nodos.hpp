@@ -42,6 +42,7 @@ public:
 	vector getMarcado();
 	bool getExplorado(vector marcado0);
 	void setExplorado(vector marcado0, bool ciclo0);
+	void setHijo(Nodo* padre, int disparo);
 	~Nodo();
 
 };

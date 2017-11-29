@@ -6,8 +6,9 @@ Oraculo::Oraculo(vector max0)
 	acotado = true;
 }
 
-Nodo *Oraculo::consulta(vector marcado0)
+Nodo *Oraculo::consulta(vector marcado0, bool *repetido)
 {
+	*repetido = false;
 	std::map<vector, Nodo*>::iterator i;
 	for (i = nodos.begin(); i != nodos.end(); ++i)
 	{
@@ -33,6 +34,7 @@ Nodo *Oraculo::consulta(vector marcado0)
 	{
 		if(nodos.find(marcado0)!=nodos.end())
 		{
+			*repetido = true;
 			return nodos[marcado0];
 		}
 		else

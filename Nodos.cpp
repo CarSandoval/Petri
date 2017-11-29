@@ -186,3 +186,7 @@ bool Nodo::getExplorado(vector marcado0)
 
 	return  nodos_creados[&marcado0];
 }
+
+void Nodo::setHijo(Nodo* n_padre, int disparo){
+	hijos[disparo] = n_padre;
+}

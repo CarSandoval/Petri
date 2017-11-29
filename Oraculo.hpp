@@ -14,7 +14,7 @@ class Oraculo
 public:
 	Oraculo(vector max0);
 	~Oraculo();
-	Nodo *consulta(vector marcado0);
-}
+	Nodo *consulta(vector marcado0, bool *repetido);
+};
 
 #endif
