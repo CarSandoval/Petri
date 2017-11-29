@@ -33,6 +33,7 @@ Nodo *Oraculo::consulta(vector marcado0, bool *repetido)
 		else
 		{
 			Nodo *nuevo = new Nodo(max_disparos,aux);
+			nodos[aux] = nuevo;
 			return nuevo;
 		}
 	}
