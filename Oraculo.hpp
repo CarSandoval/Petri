@@ -10,6 +10,7 @@ class Oraculo
 	bool acotado;
 	std::map<vector, Nodo*> nodos;
 	vector max;
+	int max_disparos;
 
 public:
 	Oraculo(vector max0);

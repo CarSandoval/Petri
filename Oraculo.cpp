@@ -1,9 +1,10 @@
 #include "Oraculo.hpp"
 
-Oraculo::Oraculo(vector max0)
+Oraculo::Oraculo(vector max0, int max_disparos0)
 {
 	max = max0;
 	acotado = true;
+	max_disparos = max_disparos0;
 }
 
 Nodo *Oraculo::consulta(vector marcado0, bool *repetido)
@@ -27,7 +28,7 @@ Nodo *Oraculo::consulta(vector marcado0, bool *repetido)
 				aux = i->first;
 			}
 		}
-		Nodo *nuevo = new Nodo(aux);
+		Nodo *nuevo = new Nodo(max_disparos,aux);
 		return nuevo;
 	}
 	else
@@ -39,7 +40,7 @@ Nodo *Oraculo::consulta(vector marcado0, bool *repetido)
 		}
 		else
 		{
-			Nodo *nuevo = new Nodo(marcado0);
+			Nodo *nuevo = new Nodo(max_disparos,marcado0);
 			nodos[marcado0] = nuevo;
 			return nuevo;
 		}

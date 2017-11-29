@@ -50,7 +50,7 @@ Nodo::Nodo(int max_disparo0, vector marcado_init)
 	padre = NULL;
 	ciclo = false;
 	marcado = marcado_init;
-	nodos = 1;
+	nodos += 1;
 	 nodos_creados[&marcado_init] = false;
 
 	disparos = new vector(ceros,max_disparo0);
@@ -187,6 +187,7 @@ bool Nodo::getExplorado(vector marcado0)
 	return  nodos_creados[&marcado0];
 }
 
-void Nodo::setHijo(Nodo* n_padre, int disparo){
+void Nodo::setHijo(Nodo* n_padre, int disparo)
+{
 	hijos[disparo] = n_padre;
 }
