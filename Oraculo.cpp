@@ -17,6 +17,7 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 
 
 	//******************************************************
+
 	if(padre!=NULL)
 	{
 		while(!(padre->getMarcado() == max))
@@ -27,6 +28,7 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 				{
 					if(marcado0.get(j)>maximus)
 					{
+						*repetido = true;
 						return padre;
 					}
 				}
@@ -34,12 +36,21 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 			padre = padre->getPadre();
 		}
 	}
-	Nodo *nuevo = new Nodo(max_disparos,marcado0);
-	_Nodos nodo_nuevo;
-	nodo_nuevo.VECTOR = marcado0;
-	nodo_nuevo.NODO = nuevo;
-	nodos.push_back(nodo_nuevo);
-	return nuevo;
+	if(exist(marcado0))
+	{
+		*repetido = true;
+		return find(marcado0);
+	}
+	else
+	{
+		Nodo *nuevo = new Nodo(max_disparos,marcado0);
+		_Nodos nodo_nuevo;
+		nodo_nuevo.VECTOR = marcado0;
+		nodo_nuevo.NODO = nuevo;
+		nodos.push_back(nodo_nuevo);
+		return nuevo;
+	}
+	return padre;
 	//*********************************************************
 
 
