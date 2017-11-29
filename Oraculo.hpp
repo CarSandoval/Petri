@@ -16,6 +16,7 @@ public:
 	Oraculo(vector max0, int max_disparos0);
 	~Oraculo();
 	Nodo *consulta(vector marcado0, bool *repetido);
+	bool getAcotado();
 };
 
 #endif

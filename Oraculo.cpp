@@ -46,3 +46,9 @@ Nodo *Oraculo::consulta(vector marcado0, bool *repetido)
 		}
 	}
 }
+
+
+bool Oraculo::getAcotado()
+{
+	return acotado;
+}
