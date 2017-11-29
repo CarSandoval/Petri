@@ -13,7 +13,7 @@ class Oraculo
 	int max_disparos;
 
 public:
-	Oraculo(vector max0);
+	Oraculo(vector max0, int max_disparos0);
 	~Oraculo();
 	Nodo *consulta(vector marcado0, bool *repetido);
 };
