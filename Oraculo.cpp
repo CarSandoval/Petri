@@ -28,8 +28,13 @@ Nodo *Oraculo::consulta(vector marcado0, bool *repetido)
 				aux = i->first;
 			}
 		}
-		Nodo *nuevo = new Nodo(max_disparos,aux);
-		return nuevo;
+		if(nodos.find(aux)!=nodos.end())
+			return nodos[aux];
+		else
+		{
+			Nodo *nuevo = new Nodo(max_disparos,aux);
+			return nuevo;
+		}
 	}
 	else
 	{
