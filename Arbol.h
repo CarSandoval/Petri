@@ -32,6 +32,9 @@ class arbol
         void check_t(Nodo* nodo);
         //void prueba(Nodo* arr[]);
 
+	bool reiniciableAux(Nodo* aux);
+	bool reiniciable();
+
 };
 
 #endif // ARBOL_H_INCLUDED

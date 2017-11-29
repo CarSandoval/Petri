@@ -306,3 +306,67 @@ arbol::check_t(vector marcado){
         }
     }
 }*/
+
+bool arbol::reiniciableAux(Nodo* aux)
+{
+	//para saber si sigue siendo verdad
+	static bool bandera = true;
+
+	//para saber si sigo teniendo posibilidad de reiniciabilidad
+	if(!bandera)
+	{
+		return false;
+	}
+
+	for(int i=0;i<(this->n);i++)
+	{
+		//variable para hijo temporal		
+		Nodo* hijo;		
+		
+		//marco explorado el nodo	
+		aux->setExplorado(aux->getMarcado(),true);
+		
+
+		//si no tengo hijo i
+		if((aux->getHijos())[i]==NULL)
+		{
+			continue;
+		}
+
+		//obtengo el hijo correspondiente y lo asigno a hijo
+		hijo = (aux->getHijos())[i];
+
+		//si mi hijo tiene solucion y lo sabe, yo tengo solucion
+		if(hijo->getCiclo() || hijo->getMarcado()==raiz->getMarcado())
+		{
+			aux->setCiclo(true);
+			return true;
+		}
+
+		//si ya habia explorado a mi hijo
+		if(aux->getExplorado(hijo->getMarcado()))
+		{
+			continue;
+		}
+
+		//sino, exploro a mi hijo
+		if(reiniciableAux((aux->getHijos())[i]))
+		{
+			aux->setCiclo(true);
+			return true;			
+		}
+		
+	}
+	//si no tengo posibilidades de vivacidad
+	bandera = false;
+	return false;
+}
+
+bool arbol::reiniciable()
+{
+	reiniciableAux(raiz);
+}
+
+
+
+
