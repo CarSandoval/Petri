@@ -4,11 +4,20 @@
 #include <map>
 #include "vector.h"
 #include "Nodos.hpp"
+#define NODO nodos_vector
+#define VECTOR nodos_nodo
 
 class Oraculo
 {
 	bool acotado;
-	std::map<vector*, Nodo*> nodos;
+	
+	class _Nodos
+	{
+	public:
+		vector nodos_vector;
+		Nodo *nodos_nodo;
+	};
+	std::vector<_Nodos> nodos;
 	vector max;
 	int max_disparos;
 	bool exist(vector marcado0);

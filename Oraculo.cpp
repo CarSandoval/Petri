@@ -10,10 +10,10 @@ Oraculo::Oraculo(vector max0, int max_disparos0)
 Nodo *Oraculo::consulta(vector marcado0, bool *repetido)
 {
 	*repetido = false;
-	std::map<vector*, Nodo*>::iterator i;
+	std::vector<_Nodos>::iterator i;
 	for (i = nodos.begin(); i != nodos.end(); ++i)
 	{
-		if(marcado0 >= *(i->first))
+		if(marcado0 >= i->VECTOR)
 		{
 			acotado = false;
 		}
@@ -23,20 +23,23 @@ Nodo *Oraculo::consulta(vector marcado0, bool *repetido)
 		vector aux = marcado0;
 		for (i = nodos.begin(); i != nodos.end(); ++i)
 		{
-			if(*(i->first) < aux && *(i->first) > max)
+			if(i->VECTOR < aux && i->VECTOR > max)
 			{
-				aux = *(i->first);
+				aux = i->VECTOR;
 			}
 		}
 		if(exist(aux))
 		{
 			*repetido = true;
-			return nodos[&aux];
+			return find(aux);
 		}
 		else
 		{
 			Nodo *nuevo = new Nodo(max_disparos,aux);
-			nodos[&aux] = nuevo;
+			_Nodos nodo_nuevo;
+			nodo_nuevo.VECTOR = aux;
+			nodo_nuevo.NODO = nuevo;
+			nodos.push_back(nodo_nuevo);
 			return nuevo;
 		}
 	}
@@ -45,12 +48,15 @@ Nodo *Oraculo::consulta(vector marcado0, bool *repetido)
 		if(exist(marcado0))
 		{
 			*repetido = true;
-			return nodos[&marcado0];
+			return find(marcado0);
 		}
 		else
 		{
 			Nodo *nuevo = new Nodo(max_disparos,marcado0);
-			nodos[&marcado0] = nuevo;
+			_Nodos nodo_nuevo;
+			nodo_nuevo.VECTOR = marcado0;
+			nodo_nuevo.NODO = nuevo;
+			nodos.push_back(nodo_nuevo);
 			return nuevo;
 		}
 	}
@@ -64,14 +70,28 @@ bool Oraculo::getAcotado()
 
 bool Oraculo::exist(vector marcado0)
 {
-	std::map<vector*, Nodo*>::iterator i;
+	std::vector<_Nodos>::iterator i;
 
 	for(i=nodos.begin();i!=nodos.end();i++)
 	{
-		if(*(i->first)==marcado0)
+		if(i->VECTOR==marcado0)
 		{
 			return true;
 		}
 	}
 	return false;
+}
+
+Nodo* Oraculo:find(vector marcado0)
+{
+	std::vector<_Nodos>::iterator i;
+
+	for(i=nodos.begin();i!=nodos.end();i++)
+	{
+		if(i->VECTOR==marcado0)
+		{
+			return i->NODO;
+		}
+	}
+	return NULL;
 }
