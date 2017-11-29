@@ -29,6 +29,8 @@ public:
 	~Oraculo();
 	Nodo *consulta(vector marcado0, Nodo *padre, bool *repetido);
 	bool getAcotado();
+	bool exist(vector marcado0);
+	Nodo *find(vector marcado0);
 };
 
 #endif
