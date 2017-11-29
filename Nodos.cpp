@@ -182,9 +182,16 @@ void Nodo::setExplorado(vector marcado0, bool ciclo0)
 
 bool Nodo::getExplorado(vector marcado0)
 {
-	 
-
-	return  nodos_creados[&marcado0];
+	std::map<vector*, bool>::iterator i;
+	vector vec0;
+	for(i=nodos_creados.begin();i!=nodos_creados.end();i++)
+	{
+		if(*(i->first)==marcado0)
+		{
+			return i->second;
+		}
+	}
+	return false;
 }
 
 void Nodo::setHijo(Nodo* n_padre, int disparo)
