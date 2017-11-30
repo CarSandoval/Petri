@@ -34,6 +34,7 @@ class arbol
 
 	bool reiniciableAux(Nodo* aux);
 	bool reiniciable();
+	bool getAcotado();
 
 };
 

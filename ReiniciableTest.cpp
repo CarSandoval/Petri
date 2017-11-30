@@ -1,5 +1,6 @@
 #include<iostream>
 #include"Arbol.h"
+//#include"Nodos.hpp"
 
 using namespace std;
 
@@ -10,7 +11,11 @@ int main()
 	arbol tree(marcado,4,3);
 	bool resp;
 
+	cout<<"estoy aqui"<<endl;
+
+	cout<<"es acotado:? "<<tree.getAcotado()<<endl;
 	resp = tree.reiniciable();
+	
 	if(resp)
 	{
 		cout<<"es reiniciable"<<endl;
@@ -19,6 +24,7 @@ int main()
 	{
 		cout<<"no es reiniciable"<<endl;
 	}
+	
 	//tree = new arbol(marcado,4,3);
 	return 0;
 }
