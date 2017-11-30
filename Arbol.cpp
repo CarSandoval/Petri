@@ -2,7 +2,7 @@
 #include "Arbol.h"
 //#include "Nodos.hpp"
 //#include "Vector.h"
-//#include "Oraculo.h"
+//#include "Oraculo.hpp"
 
 arbol::arbol()
 {
@@ -45,6 +45,7 @@ arbol::arbol(int* marcado, int t, int p)
         for (int j = 0; j < p; ++j)
         {
             std::cin >> aux[j];
+	    //getline(std::cin, aux[j]);
         }
         pre[i]=new vector(aux,p);
     }
@@ -56,6 +57,7 @@ arbol::arbol(int* marcado, int t, int p)
         for (int j = 0; j < p; ++j)
         {
             std::cin >> aux[j];
+	    //getline(std::cin,aux[j]);
         }
         post[i]=new vector(aux,p);
     }
@@ -307,10 +309,17 @@ arbol::check_t(vector marcado){
     }
 }*/
 
+bool arbol::getAcotado()
+{
+	return direccion->getAcotado();
+}
+
 bool arbol::reiniciableAux(Nodo* aux)
 {
 	//para saber si sigue siendo verdad
 	static bool bandera = true;
+
+	//std::cout<<"Estoy dentro\n";
 
 	//para saber si sigo teniendo posibilidad de reiniciabilidad
 	if(!bandera)
@@ -320,6 +329,7 @@ bool arbol::reiniciableAux(Nodo* aux)
 
 	for(int i=0;i<(this->n);i++)
 	{
+		//std::cout<<"Estoy en el ciclo "<<i<<"\n";
 		//variable para hijo temporal		
 		Nodo* hijo;		
 		
@@ -332,23 +342,23 @@ bool arbol::reiniciableAux(Nodo* aux)
 		{
 			continue;
 		}
-
+		
 		//obtengo el hijo correspondiente y lo asigno a hijo
 		hijo = (aux->getHijos())[i];
-
+		
 		//si mi hijo tiene solucion y lo sabe, yo tengo solucion
 		if(hijo->getCiclo() || hijo->getMarcado()==raiz->getMarcado())
 		{
 			aux->setCiclo(true);
 			return true;
 		}
-
+		
 		//si ya habia explorado a mi hijo
 		if(aux->getExplorado(hijo->getMarcado()))
 		{
 			continue;
 		}
-
+		
 		//sino, exploro a mi hijo
 		if(reiniciableAux((aux->getHijos())[i]))
 		{
@@ -364,7 +374,9 @@ bool arbol::reiniciableAux(Nodo* aux)
 
 bool arbol::reiniciable()
 {
+	std::cout<<"Comence1\n";
 	reiniciableAux(raiz);
+	std::cout<<"fincalice1\n";
 }
 
 
