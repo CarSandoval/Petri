@@ -2,17 +2,29 @@
 #include <iostream>
 //#include "Test.hpp"
 
-std::map<vector*,bool> Nodo::init_nodos_creados()
+std::vector<_Nodos> Nodo::init_nodos_creados()
 {
-	std::map<vector*,bool> aux;
+
+	std::vector<_Nodos> aux;
 	vector vec_aux;
-	aux[&vec_aux] = false;
+	_Nodos aux_nodo;
+	aux_nodo.VECTOR = vec_aux;
+	aux_nodo.BOOL = false;
+	aux.push_back(aux_nodo);
 	return aux;
 }
 
-std::map<vector*,bool> Nodo::nodos_creados = init_nodos_creados();
+std::vector<_Nodos> Nodo::nodos_creados = Nodo::init_nodos_creados();
 int Nodo::nodos = 0;
 int Nodo::max_disparo = 0;
+
+
+void Nodo::addNodosCreados(vector vec0, bool bool0)
+{
+	_Nodos nodos_creados0;
+	nodos_creados0.fill(vec0,bool0);
+	nodos_creados.push_back(nodos_creados0);
+}
 
 
 Nodo::Nodo()
@@ -36,7 +48,7 @@ Nodo::Nodo(vector marcado0)
 	padre = NULL;
 	marcado = marcado0;
 	nodos++;
-	 nodos_creados[&marcado0] = false;
+	addNodosCreados(marcado0,false);
 
 	 
 }
@@ -51,7 +63,7 @@ Nodo::Nodo(int max_disparo0, vector marcado_init)
 	ciclo = false;
 	marcado = marcado_init;
 	nodos += 1;
-	 nodos_creados[&marcado_init] = false;
+	addNodosCreados(marcado_init,false);
 
 	disparos = new vector(ceros,max_disparo0);
 	//disparos = *disparos0;
@@ -70,7 +82,7 @@ Nodo::Nodo(Nodo *padre0, vector marcado0)
 	padre = padre0;
 	marcado = marcado0;
 	nodos++;
-	 nodos_creados[&marcado0] = false;
+	addNodosCreados(marcado0,false);
 
 	 
 }
@@ -175,20 +187,19 @@ vector Nodo::getMarcado()
 
 void Nodo::setExplorado(vector marcado0, bool ciclo0)
 {
-	 nodos_creados[&marcado0] = ciclo0;
-
+	addNodosCreados(marcado0,ciclo0);
 	 
 }
 
 bool Nodo::getExplorado(vector marcado0)
 {
-	std::map<vector*, bool>::iterator i;
+	std::vector<_Nodos>::iterator i;
 	vector vec0;
 	for(i=nodos_creados.begin();i!=nodos_creados.end();i++)
 	{
-		if(*(i->first)==marcado0)
+		if(i->VECTOR==marcado0)
 		{
-			return i->second;
+			return i->BOOL;
 		}
 	}
 	return false;

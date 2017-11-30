@@ -7,7 +7,21 @@
 #define NODO_HPP_INCLUDED
 
 #define MARCADO_CERO new vector()
+#define VECTOR nodos_vector
+#define BOOL nodos_bool
 
+
+class _Nodos
+{
+public:
+	vector nodos_vector;
+	bool nodos_bool;
+	void fill(vector vec0,bool bool0)
+	{
+		nodos_vector = vec0;
+		nodos_bool = bool0;
+	}
+};
 
 class Nodo
 {
@@ -17,12 +31,17 @@ class Nodo
 	std::vector<Nodo*> hijos;
 	vector disparos;
 	vector marcado;
-	static std::map<vector*,bool> nodos_creados;//(first.begin(),first.end());
+	
+	void addNodosCreados(vector vec0, bool bool0);
+
+	static std::vector<_Nodos> nodos_creados;
+	//static std::map<vector*,bool> nodos_creados;//(first.begin(),first.end());
 	static int nodos;
 	static int max_disparo;
-	static std::map<vector*,bool> init_nodos_creados();
+	static std::vector<_Nodos> init_nodos_creados();
 
 public:
+	
 	Nodo();
 	Nodo(vector marcado0);
 	Nodo(int max_disparo0, vector marcado_init);
