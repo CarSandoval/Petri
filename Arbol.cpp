@@ -318,13 +318,15 @@ bool arbol::reiniciableAux(Nodo* aux)
 {
 	//para saber si sigue siendo verdad
 	static bool bandera = true;
-
-	//std::cout<<"Estoy dentro\n";
+	std::cout<<"marcado: ";
+	imprimirVec(aux->getMarcado());
+	std::cout<<aux->getExplorado(aux->getMarcado())<<std::endl;
+	
 
 	//para saber si sigo teniendo posibilidad de reiniciabilidad
 	if(!bandera)
 	{
-		return false;
+		//return false;
 	}
 
 	for(int i=0;i<(this->n);i++)
@@ -350,7 +352,7 @@ bool arbol::reiniciableAux(Nodo* aux)
 		if(hijo->getCiclo() || hijo->getMarcado()==raiz->getMarcado())
 		{
 			aux->setCiclo(true);
-			return true;
+			//return bandera;
 		}
 		
 		//si ya habia explorado a mi hijo
@@ -363,13 +365,30 @@ bool arbol::reiniciableAux(Nodo* aux)
 		if(reiniciableAux((aux->getHijos())[i]))
 		{
 			aux->setCiclo(true);
-			return true;			
+			//return bandera;			
+		}
+		
+	}
+	for(int i=0;i<this->n;i++)
+	{
+		//si no tengo hijo i
+		if((aux->getHijos())[i]==NULL)
+		{
+			continue;
+		}
+		Nodo* hijo;
+		//obtengo el hijo correspondiente y lo asigno a hijo
+		hijo = (aux->getHijos())[i];
+		if(hijo->getCiclo()==false)
+		{
+			bandera = false;
+			return false;
 		}
 		
 	}
 	//si no tengo posibilidades de vivacidad
-	bandera = false;
-	return false;
+	//bandera = false;
+	return true;
 }
 
 bool arbol::reiniciable()
@@ -377,6 +396,15 @@ bool arbol::reiniciable()
 	std::cout<<"Comence1\n";
 	reiniciableAux(raiz);
 	std::cout<<"fincalice1\n";
+}
+
+void arbol::imprimirVec(vector a)
+{
+	for(int i=0;i<a.size();i++)
+	{
+		std::cout<<a.get(i)<<",";
+	}
+	std::cout<<"\n";
 }
 
 
