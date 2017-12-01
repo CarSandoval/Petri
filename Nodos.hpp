@@ -14,13 +14,12 @@
 class _Nodos
 {
 public:
+	_Nodos();
+	bool error;
 	vector nodos_vector;
 	bool nodos_bool;
-	void fill(vector vec0,bool bool0)
-	{
-		nodos_vector = vec0;
-		nodos_bool = bool0;
-	}
+	void fill(vector vec0,bool bool0);
+	void operator =(const _Nodos &v1);
 };
 
 
@@ -33,8 +32,8 @@ public:
 	list();
 	list(_Nodos _value0);
 	void push_back(_Nodos _value0);
-	_Nodos *find(int i0);
-	_Nodos *find_inside(vector value20);
+	_Nodos find(int i0);
+	_Nodos find_inside(vector value20);
 };
 
 
