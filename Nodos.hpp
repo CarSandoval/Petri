@@ -23,6 +23,21 @@ public:
 	}
 };
 
+
+class list
+{
+	_Nodos _value;
+	list *_list;
+	static list *last;
+public:
+	list();
+	list(_Nodos _value0);
+	void push_back(_Nodos _value0);
+	_Nodos *find(int i0);
+	_Nodos *find_inside(vector value20);
+};
+
+
 class Nodo
 {
 	bool mayorizado;
@@ -34,11 +49,11 @@ class Nodo
 	
 	void addNodosCreados(vector vec0, bool bool0);
 
-	static std::vector<_Nodos> nodos_creados;
+	static list *nodos_creados;
 	//static std::map<vector*,bool> nodos_creados;//(first.begin(),first.end());
 	static int nodos;
 	static int max_disparo;
-	static std::vector<_Nodos> init_nodos_creados();
+	static list *init_nodos_creados();
 
 public:
 	

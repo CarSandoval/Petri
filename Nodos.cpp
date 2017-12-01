@@ -2,28 +2,97 @@
 #include <iostream>
 //#include "Test.hpp"
 
-std::vector<_Nodos> Nodo::init_nodos_creados()
+list *Nodo::init_nodos_creados()
 {
 
-	std::vector<_Nodos> aux;
+	list *aux;
 	vector vec_aux;
 	_Nodos aux_nodo;
 	aux_nodo.VECTOR = vec_aux;
 	aux_nodo.BOOL = false;
-	aux.push_back(aux_nodo);
+	aux->push_back(aux_nodo);
 	return aux;
 }
 
-std::vector<_Nodos> Nodo::nodos_creados = Nodo::init_nodos_creados();
+list *Nodo::nodos_creados = Nodo::init_nodos_creados();
+
 int Nodo::nodos = 0;
 int Nodo::max_disparo = 0;
+list *list::last = NULL;
+
+list::list()
+{
+	_Nodos nodo;
+	_value = nodo;
+	_list = NULL; 
+	//last = this;
+}
+
+list::list(_Nodos _value0)
+{
+	_value = _value0;
+	_list = NULL;
+	//last = this;
+}
+
+void list::push_back(_Nodos _value0)
+{
+	_Nodos *aux = find_inside(_value0.VECTOR);
+	if(aux != NULL)
+	{
+		aux->BOOL = _value0.BOOL;
+	}
+	else
+	{
+		list *_list0 = new list(_value0);
+		_list0->_list = last;
+		last = _list0;
+	}
+}
+
+_Nodos* list::find(int i0)
+{
+	list *current_list;
+	current_list = last;
+	_Nodos *aux;
+	int i=0;
+	while(current_list!=NULL)
+	{
+		if(i==i0)
+		{
+			*aux = current_list->_value;
+			return aux;
+		}
+		i++;
+		current_list = current_list->_list;
+	}
+	return NULL;
+}
+
+_Nodos* list::find_inside(vector value20)
+{
+	list *current_list;
+	current_list = last;
+	_Nodos *aux;
+	while(current_list!=NULL)
+	{
+		if(value20==current_list->_value.VECTOR)
+		{
+
+			*aux = current_list->_value;
+			return aux;
+		}
+		current_list = current_list->_list;
+	}
+	return NULL;
+}
 
 
 void Nodo::addNodosCreados(vector vec0, bool bool0)
 {
 	_Nodos nodos_creados0;
 	nodos_creados0.fill(vec0,bool0);
-	nodos_creados.push_back(nodos_creados0);
+	nodos_creados->push_back(nodos_creados0);
 }
 
 
@@ -193,16 +262,8 @@ void Nodo::setExplorado(vector marcado0, bool ciclo0)
 
 bool Nodo::getExplorado(vector marcado0)
 {
-	std::vector<_Nodos>::iterator i;
-	vector vec0;
-	for(i=nodos_creados.begin();i!=nodos_creados.end();i++)
-	{
-		if(i->VECTOR==marcado0)
-		{
-			return i->BOOL;
-		}
-	}
-	return false;
+	_Nodos *aux = nodos_creados->find_inside(marcado0);
+	return aux->BOOL;
 }
 
 void Nodo::setHijo(Nodo* n_padre, int disparo)
