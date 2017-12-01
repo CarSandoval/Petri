@@ -1,4 +1,5 @@
 #include "Nodos.hpp"
+#include "Arbol.h"
 #include <iostream>
 //#include "Test.hpp"
 
@@ -29,8 +30,8 @@ _Nodos::_Nodos()
 
 void _Nodos::fill(vector vec0,bool bool0)
 {
-	nodos_vector = vec0;
-	nodos_bool = bool0;
+	VECTOR = vec0;
+	BOOL = bool0;
 }
 
 void _Nodos::operator =(const _Nodos &v1)
@@ -62,8 +63,17 @@ void list::push_back(_Nodos _value0)
 	aux = find_inside(_value0.VECTOR);
 	if(!aux.error)
 	{
-		std::cout<<"000000000000DEBUG00000000000000000"<<std::endl;
-		aux.BOOL = _value0.BOOL;
+		list *current_list;
+		current_list = last;
+		while(current_list!=NULL)
+		{
+
+			if(current_list->_value.VECTOR==_value0.VECTOR)
+			{
+				current_list->_value = _value0;
+			}
+			current_list = current_list->_list;
+		}
 	}
 	else
 	{
@@ -71,6 +81,7 @@ void list::push_back(_Nodos _value0)
 		_list0->_list = last;
 		last = _list0;
 	}
+	
 }
 
 _Nodos list::find(int i0)
@@ -101,7 +112,7 @@ _Nodos list::find_inside(vector value20)
 {
 	list *current_list;
 	current_list = last;
-	last==NULL ? std::cout<<"NULL\n":std::cout<<"NO NULL\n";
+	//last==NULL ? std::cout<<"NULL\n":std::cout<<"NO NULL\n";
 	_Nodos aux;
 	_Nodos err;
 	while(current_list!=NULL)
@@ -121,12 +132,29 @@ _Nodos list::find_inside(vector value20)
 	return err;
 }
 
+void list::imprimir()
+{
+	list *current_list;
+	current_list = last;
+	_Nodos aux;
+	_Nodos err;
+	while(current_list!=NULL)
+	{
+		arbol::imprimirVec(current_list->_value.VECTOR);
+		std::cout<<"	->	"<<current_list->_value.BOOL<<std::endl;
+		current_list = current_list->_list;
+	}
+
+}
+
 
 void Nodo::addNodosCreados(vector vec0, bool bool0)
 {
 	_Nodos nodos_creados0;
 	nodos_creados0.fill(vec0,bool0);
 	nodos_creados->push_back(nodos_creados0);
+	arbol::imprimirVec((nodos_creados->find_inside(nodos_creados0.VECTOR)).VECTOR);
+	std::cout<<nodos_creados->find_inside(nodos_creados0.VECTOR).BOOL<<"\n";
 }
 
 
@@ -299,7 +327,12 @@ bool Nodo::getExplorado(vector marcado0)
 	_Nodos aux;
 	aux = nodos_creados->find_inside(marcado0);
 	
-	return aux.BOOL;
+	if(!aux.error)
+		return aux.BOOL;
+	else
+	{
+		return true;
+	}
 }
 
 void Nodo::setHijo(Nodo* n_padre, int disparo)

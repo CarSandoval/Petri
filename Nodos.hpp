@@ -25,15 +25,17 @@ public:
 
 class list
 {
-	_Nodos _value;
+	
 	list *_list;
 	static list *last;
 public:
+	_Nodos _value;
 	list();
 	list(_Nodos _value0);
 	void push_back(_Nodos _value0);
 	_Nodos find(int i0);
 	_Nodos find_inside(vector value20);
+	static void imprimir();
 };
 
 
