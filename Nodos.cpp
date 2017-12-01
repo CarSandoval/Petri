@@ -58,9 +58,11 @@ list::list(_Nodos _value0)
 
 void list::push_back(_Nodos _value0)
 {
-	_Nodos aux = find_inside(_value0.VECTOR);
-	if(aux.error)
+	_Nodos aux;
+	aux = find_inside(_value0.VECTOR);
+	if(!aux.error)
 	{
+		std::cout<<"000000000000DEBUG00000000000000000"<<std::endl;
 		aux.BOOL = _value0.BOOL;
 	}
 	else
@@ -99,6 +101,7 @@ _Nodos list::find_inside(vector value20)
 {
 	list *current_list;
 	current_list = last;
+	last==NULL ? std::cout<<"NULL\n":std::cout<<"NO NULL\n";
 	_Nodos aux;
 	_Nodos err;
 	while(current_list!=NULL)
@@ -107,7 +110,7 @@ _Nodos list::find_inside(vector value20)
 		if(value20==current_list->_value.VECTOR)
 		{
 			aux = current_list->_value;
-			std::cout<<"000000000000DEBUG00000000000000000"<<std::endl;
+			
 			return aux;
 		}
 		current_list = current_list->_list;
