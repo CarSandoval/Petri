@@ -394,7 +394,7 @@ bool arbol::reiniciableAux(Nodo* aux)
 bool arbol::reiniciable()
 {
 	std::cout<<"Comence1\n";
-	reiniciableAux(raiz);
+	return reiniciableAux(raiz);
 	std::cout<<"fincalice1\n";
 }
 
