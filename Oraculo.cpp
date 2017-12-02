@@ -24,7 +24,11 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 		{
 			if(marcado0 >= padre->getMarcado())
 			{
-				acotado = false;
+
+				if(marcado0 > padre->getMarcado())
+				{
+					acotado = false;
+				}
 				for(int j=0;j<marcado0.size();j++)
 				{
 					if(marcado0.get(j)>maximus)
