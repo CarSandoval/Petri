@@ -25,7 +25,6 @@ public:
 
 class list
 {
-	
 	list *_list;
 	static list *last;
 public:
