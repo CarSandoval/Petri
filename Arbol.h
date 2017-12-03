@@ -34,6 +34,8 @@ class arbol
 
 	bool reiniciableAux(Nodo* aux);
 	bool reiniciable();
+    bool vivacidadAux(Nodo* nodo);
+    bool vivacidad();
 	bool getAcotado();
 	static void imprimirVec(vector a);
 

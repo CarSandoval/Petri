@@ -51,6 +51,17 @@ int main()
 	{
 		std::cout<<"No es reiniciable"<<std::endl;
 	}
+
+	resp = tree.vivacidad();
+	
+	if(resp)
+	{
+		std::cout<<"Es Viva"<<std::endl;
+	}
+	else
+	{
+		std::cout<<"No es Viva"<<std::endl;
+	}
 	
 	//tree = new arbol(marcado,4,3);
 	return 0;
