@@ -15,6 +15,19 @@ list *Nodo::init_nodos_creados()
 	return aux;
 }
 
+list *Nodo::init_nodos_vivos()
+{
+
+	list *aux;
+	vector vec_aux;
+	_Nodos aux_nodo;
+	aux_nodo.VECTOR = vec_aux;
+	aux_nodo.BOOL = false;
+	aux->push_back(aux_nodo);
+	return aux;
+}
+
+list *Nodo::nodos_vivos = Nodo::init_nodos_vivos();
 list *Nodo::nodos_creados = Nodo::init_nodos_creados();
 
 int Nodo::nodos = 0;
@@ -157,6 +170,15 @@ void Nodo::addNodosCreados(vector vec0, bool bool0)
 	std::cout<<nodos_creados->find_inside(nodos_creados0.VECTOR).BOOL<<"\n";
 }
 
+void Nodo::addNodosVivos(vector vec0, bool bool0)
+{
+	_Nodos nodos_vivos0;
+	nodos_vivos0.fill(vec0,bool0);
+	nodos_vivos->push_back(nodos_vivos0);
+	arbol::imprimirVec((nodos_vivos->find_inside(nodos_vivos0.VECTOR)).VECTOR);
+	std::cout<<nodos_vivos->find_inside(nodos_vivos0.VECTOR).BOOL<<"\n";
+}
+
 
 Nodo::Nodo()
 {
@@ -180,6 +202,7 @@ Nodo::Nodo(vector marcado0)
 	marcado = marcado0;
 	nodos++;
 	addNodosCreados(marcado0,false);
+	addNodosVivos(marcado0,false);
 
 	 
 }
@@ -195,6 +218,7 @@ Nodo::Nodo(int max_disparo0, vector marcado_init)
 	marcado = marcado_init;
 	nodos += 1;
 	addNodosCreados(marcado_init,false);
+	addNodosVivos(marcado0,false);
 
 	disparos = new vector(ceros,max_disparo0);
 	//disparos = *disparos0;
@@ -214,6 +238,7 @@ Nodo::Nodo(Nodo *padre0, vector marcado0)
 	marcado = marcado0;
 	nodos++;
 	addNodosCreados(marcado0,false);
+	addNodosVivos(marcado0,false);
 
 	 
 }
@@ -225,6 +250,7 @@ bool Nodo::nuevo_hijo(Nodo *nuevo_hijo0, int disparo)
 	if(disparo<max_disparo)
 	{
 	    hijos[disparo] = nuevo_hijo0;
+	    disparos.set(disparo,1);
 	    
 	    return true;
 	}
@@ -254,6 +280,20 @@ bool Nodo::getCiclo()
 	 
 
 	return ciclo;
+}
+
+void Nodo::setVivo(bool vivo0)
+{
+	vivo = vivo0;
+
+	 
+}
+
+bool Nodo::getVivo()
+{
+	 
+
+	return vivo;
 }
 
 void Nodo::mayorizar()
@@ -326,6 +366,25 @@ bool Nodo::getExplorado(vector marcado0)
 {
 	_Nodos aux;
 	aux = nodos_creados->find_inside(marcado0);
+	
+	if(!aux.error)
+		return aux.BOOL;
+	else
+	{
+		return true;
+	}
+}
+
+void Nodo::setExploradoVivo(vector marcado0, bool ciclo0)
+{
+	addNodosVivos(marcado0,ciclo0);
+	 
+}
+
+bool Nodo::getExploradoVivo(vector marcado0)
+{
+	_Nodos aux;
+	aux = nodos_vivos->find_inside(marcado0);
 	
 	if(!aux.error)
 		return aux.BOOL;

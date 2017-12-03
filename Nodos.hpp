@@ -43,14 +43,18 @@ class Nodo
 {
 	bool mayorizado;
 	bool ciclo;
+	bool vivo;
 	Nodo *padre;
 	std::vector<Nodo*> hijos;
 	vector disparos;
 	vector marcado;
+
 	
 	void addNodosCreados(vector vec0, bool bool0);
+	void addNodosVivos(vectro vec0, bool bool0);
 
 	static list *nodos_creados;
+	static list *nodos_vivos;
 	//static std::map<vector*,bool> nodos_creados;//(first.begin(),first.end());
 	static int nodos;
 	static int max_disparo;
@@ -65,6 +69,8 @@ public:
 	bool nuevo_hijo(Nodo *nuevo_hijo0, int disparo);
 	void setCiclo(bool ciclo0);
 	bool getCiclo();
+	void setVivo(bool vivo0);
+	bool getVivo();
 	void mayorizar();
 	bool getMayorizado();
 	vector getDisparos();
@@ -77,6 +83,8 @@ public:
 	vector getMarcado();
 	bool getExplorado(vector marcado0);
 	void setExplorado(vector marcado0, bool ciclo0);
+	bool getExploradoVivo(vector marcado0);
+	void setExploradoVivo(vector marcado0, bool ciclo0);
 	void setHijo(Nodo* padre, int disparo);
 	~Nodo();
 
