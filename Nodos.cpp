@@ -188,8 +188,7 @@ Nodo::Nodo()
 	nodos = 0;
 	max_disparo = 1;
 	ciclo = false;
-
-	 
+	vivo = false;
 
 
 }
@@ -198,6 +197,7 @@ Nodo::Nodo(vector marcado0)
 {
 	mayorizado = false;
 	ciclo = false;
+	vivo = false;
 	padre = NULL;
 	marcado = marcado0;
 	nodos++;
@@ -215,6 +215,7 @@ Nodo::Nodo(int max_disparo0, vector marcado_init)
 	mayorizado = false;
 	padre = NULL;
 	ciclo = false;
+	vivo = false;
 	marcado = marcado_init;
 	nodos += 1;
 	addNodosCreados(marcado_init,false);
@@ -234,6 +235,7 @@ Nodo::Nodo(Nodo *padre0, vector marcado0)
 {
 	mayorizado = false;
 	ciclo = false;
+	vivo = false;
 	padre = padre0;
 	marcado = marcado0;
 	nodos++;
