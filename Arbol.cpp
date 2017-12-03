@@ -408,5 +408,86 @@ void arbol::imprimirVec(vector a)
 }
 
 
+bool arbol::vivacidadAux(Nodo* aux)
+{
+    //para saber si sigue siendo verdad
+    static bool bandera = true;
+    std::cout<<"marcado: ";
+    imprimirVec(aux->getMarcado());
+    std::cout<<aux->getExploradoVivo(aux->getMarcado())<<std::endl;
+    
 
+    //para saber si sigo teniendo posibilidad de reiniciabilidad
+    if(!bandera)
+    {
+        //return false;
+    }
 
+    for(int i=0;i<(this->n);i++)
+    {
+        //std::cout<<"Estoy en el ciclo "<<i<<"\n";
+        //variable para hijo temporal       
+        Nodo* hijo;     
+        
+        //marco explorado el nodo   
+        aux->setExploradoVivo(aux->getMarcado(),true);
+        
+
+        //si no tengo hijo i
+        if((aux->getHijos())[i]==NULL)
+        {
+            continue;
+        }
+        
+        //obtengo el hijo correspondiente y lo asigno a hijo
+        hijo = (aux->getHijos())[i];
+        
+        //si mi hijo tiene solucion y lo sabe, yo tengo solucion
+        if(hijo->getVivo() || hijo->getMarcado()==raiz->getMarcado())
+        {
+            aux->setVivo(true);
+            //return bandera;
+        }
+        
+        //si ya habia explorado a mi hijo
+        if(aux->getExploradoVivo(hijo->getMarcado()))
+        {
+            continue;
+        }
+        
+        //sino, exploro a mi hijo
+        if(vivacidadAux((aux->getHijos())[i]))
+        {
+            aux->setVivo(true);
+            //return bandera;           
+        }
+        
+    }
+    for(int i=0;i<this->n;i++)
+    {
+        //si no tengo hijo i
+        if((aux->getHijos())[i]==NULL)
+        {
+            continue;
+        }
+        Nodo* hijo;
+        //obtengo el hijo correspondiente y lo asigno a hijo
+        hijo = (aux->getHijos())[i];
+        if(hijo->getVivo()==false)
+        {
+            bandera = false;
+            return false;
+        }
+        
+    }
+    //si no tengo posibilidades de vivacidad
+    //bandera = false;
+    return true;
+}
+
+bool arbol::vivacidad()
+{
+    std::cout<<"Vivacidad inicio\n";
+    return vivacidadAux(raiz);
+    std::cout<<"Vivacidad final\n";
+}
