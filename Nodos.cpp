@@ -312,12 +312,17 @@ bool Nodo::getMayorizado()
 
 vector Nodo::getDisparos()
 {
-	for(int i=0; i<disparos.size(); i++)
-		hijos[i]==NULL ? disparos.set(i,0) : disparos.set(i,1);
-
-	 
+	//for(int i=0; i<disparos.size(); i++)
+	//	hijos[i]==NULL ? disparos.set(i,0) : disparos.set(i,1); 
 
 	return disparos;
+
+}
+
+void Nodo::setDisparos(vector disparos0)
+{
+
+	disparos = disparos0;
 
 }
 

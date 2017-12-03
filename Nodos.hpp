@@ -75,6 +75,7 @@ public:
 	void mayorizar();
 	bool getMayorizado();
 	vector getDisparos();
+	void setDisparos(vector disparos0);
 	static int getNodos();
 	Nodo *getPadre();
 	void setPadre(Nodo *padre0);
