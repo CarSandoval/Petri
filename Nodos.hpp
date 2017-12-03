@@ -51,7 +51,7 @@ class Nodo
 
 	
 	void addNodosCreados(vector vec0, bool bool0);
-	void addNodosVivos(vectro vec0, bool bool0);
+	void addNodosVivos(vector vec0, bool bool0);
 
 	static list *nodos_creados;
 	static list *nodos_vivos;
@@ -59,6 +59,7 @@ class Nodo
 	static int nodos;
 	static int max_disparo;
 	static list *init_nodos_creados();
+	static list *init_nodos_vivos();
 
 public:
 	

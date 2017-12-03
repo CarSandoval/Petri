@@ -218,7 +218,7 @@ Nodo::Nodo(int max_disparo0, vector marcado_init)
 	marcado = marcado_init;
 	nodos += 1;
 	addNodosCreados(marcado_init,false);
-	addNodosVivos(marcado0,false);
+	addNodosVivos(marcado_init,false);
 
 	disparos = new vector(ceros,max_disparo0);
 	//disparos = *disparos0;
