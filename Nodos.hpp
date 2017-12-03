@@ -36,6 +36,7 @@ public:
 	_Nodos find(int i0);
 	_Nodos find_inside(vector value20);
 	static void imprimir();
+	static void purge();
 };
 
 

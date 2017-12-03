@@ -145,6 +145,11 @@ _Nodos list::find_inside(vector value20)
 	return err;
 }
 
+void list::purge()
+{
+	last = NULL;
+}
+
 void list::imprimir()
 {
 	list *current_list;
