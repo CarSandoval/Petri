@@ -25,8 +25,14 @@ arbol::arbol(int* marcado, int t, int p)
 
     //Arreglo auxiliar para calcular el marcado maximo
     int arr_max[m] = {0};
-    int unos[n] = {1};
-    uno = new vector(unos,n);  
+    int unos[n];
+    for (int i = 0; i < n; ++i)
+    {
+        unos[i]=1;
+    }
+    uno = new vector(unos,n);
+    std::cout <<"Vector uno: "; 
+    imprimirVec(uno);
 
     pre = new vector[t];
     post = new vector[t];
@@ -351,11 +357,17 @@ bool arbol::reiniciableAux(Nodo* aux)
 		hijo = (aux->getHijos())[i];
 		
 		//si mi hijo tiene solucion y lo sabe, yo tengo solucion
-		if(hijo->getCiclo() || hijo->getMarcado()==raiz->getMarcado())
+		if(hijo->getCiclo())
 		{
 			aux->setCiclo(true);
 			//return bandera;
 		}
+
+        if (hijo->getMarcado()==raiz->getMarcado())
+        {
+            aux->setCiclo(true);
+            raiz->setCiclo(true);
+        }
 		
 		//si ya habia explorado a mi hijo
 		if(aux->getExplorado(hijo->getMarcado()))
@@ -371,6 +383,10 @@ bool arbol::reiniciableAux(Nodo* aux)
 		}
 		
 	}
+    std::cout<<"Marcado Actual: ";
+    imprimirVec(aux->getMarcado());
+    std::cout << std::endl;
+    std::cout << "Ciclico? :" << aux->getCiclo() <<std::endl;
 	for(int i=0;i<this->n;i++)
 	{
 		//si no tengo hijo i
@@ -384,6 +400,8 @@ bool arbol::reiniciableAux(Nodo* aux)
 		if(hijo->getCiclo()==false)
 		{
 			bandera = false;
+            std::cout<<"Retorno FALSO: ";
+            imprimirVec(hijo->getMarcado());
 			return false;
 		}
 		
@@ -412,6 +430,7 @@ void arbol::imprimirVec(vector a)
 
 bool arbol::vivacidadAux(Nodo* aux)
 {
+    int null_cont=0;
     //para saber si sigue siendo verdad
     static bool bandera = true;
     //std::cout<<"marcado: ";
@@ -455,11 +474,15 @@ bool arbol::vivacidadAux(Nodo* aux)
         //std::cout<<"marcado suma  "<<i<<": ";
         //imprimirVec(aux->getDisparos());
         //si mi hijo tiene solucion y lo sabe, yo tengo solucion
-        if(hijo->getVivo() || aux->getDisparos()>=uno)
+        if(hijo->getVivo())
         {
             //std::cout << "Entre 1" << std::endl;
             aux->setVivo(true);
             //return bandera;
+        }
+        if (aux->getDisparos()>=uno)
+        {
+            aux->setVivo(true);
         }
         
         //std::cout << "Lista de vivacidad: " << std::endl;
@@ -480,6 +503,10 @@ bool arbol::vivacidadAux(Nodo* aux)
             //return bandera;           
         }
         aux->setDisparos(aux->getDisparos() + hijo->getDisparos());
+        if (aux->getDisparos()>=uno)
+        {
+            aux->setVivo(true);
+        }
         
     }
     for(int i=0;i<this->n;i++)
@@ -487,17 +514,31 @@ bool arbol::vivacidadAux(Nodo* aux)
         //si no tengo hijo i
         if((aux->getHijos())[i]==NULL)
         {
+            null_cont++;
             continue;
         }
         Nodo* hijo;
         //obtengo el hijo correspondiente y lo asigno a hijo
         hijo = (aux->getHijos())[i];
+        std::cout << "Marcado :";
+        imprimirVec(hijo->getMarcado());
+        imprimirVec(hijo->getDisparos());
+        imprimirVec(uno);
+        std::cout << "Vivo? :" <<hijo->getVivo() << std::endl;
         if(hijo->getVivo()==false)
         {
+            std::cout<<"Marcado FALSO: ";
+            imprimirVec(hijo->getMarcado());
             bandera = false;
             return false;
         }
         
+    }
+    if (null_cont == n)
+    {
+        std::cout<<"Marcado no vivo: ";
+        imprimirVec(aux->getMarcado());
+        return false;
     }
     //si no tengo posibilidades de vivacidad
     //bandera = false;

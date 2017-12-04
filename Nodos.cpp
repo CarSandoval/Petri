@@ -115,7 +115,7 @@ _Nodos list::find(int i0)
 		current_list = current_list->_list;
 	}
 	//return NULL;
-	std::cout<<"ERROR: list::find_inside(int)... Instance _Nodos (NOT FOUND)"<<std::endl;
+	//std::cout<<"ERROR: list::find_inside(int)... Instance _Nodos (NOT FOUND)"<<std::endl;
 	err.error = true;
 	return err;
 
@@ -140,7 +140,7 @@ _Nodos list::find_inside(vector value20)
 		current_list = current_list->_list;
 	}
 	//return NULL;
-	std::cout<<"ERROR: list::find_inside(vector)... Instance _Nodos (NOT FOUND)"<<std::endl;
+	//std::cout<<"ERROR: list::find_inside(vector)... Instance _Nodos (NOT FOUND)"<<std::endl;
 	err.error = true;
 	return err;
 }
@@ -384,7 +384,7 @@ bool Nodo::getExplorado(vector marcado0)
 		return aux.BOOL;
 	else
 	{
-		return true;
+		return false;
 	}
 }
 

@@ -259,14 +259,32 @@ bool operator >=(const vector &v0, const vector &v1)
 
 bool operator >(const vector &v0, const vector &v1)
 {
+	int contMI, contM;
+	contMI = contM = 0;
 	for(int i=0;i<v0.tamano;i++)
 	{
-		if(v0.data[i]<=v1.data[i])
+		if(v0.data[i]>=v1.data[i])
+		{
+			contMI++;
+		}
+		if (v0.data[i]>v1.data[i])
+		{
+			contM++;
+		}
+		/*
+		if(data[i]<=v1.data[i])
 		{
 			return false;
-		}	
+		}
+		*/	
 	}
-	return true;
+	if (contMI == v0.tamano && contM>0)
+	{
+		return true;
+	}else
+	{
+		return false;
+	}
 }
 
 bool operator <=(const vector &v0, const vector &v1)
@@ -283,14 +301,32 @@ bool operator <=(const vector &v0, const vector &v1)
 
 bool operator <(const vector &v0, const vector &v1)
 {
+	int contMI, contM;
+	contMI = contM = 0;
 	for(int i=0;i<v0.tamano;i++)
 	{
-		if(v0.data[i]>=v1.data[i])
+		if(v0.data[i]<=v1.data[i])
+		{
+			contMI++;
+		}
+		if (v0.data[i]<v1.data[i])
+		{
+			contM++;
+		}
+		/*
+		if(data[i]<=v1.data[i])
 		{
 			return false;
-		}	
+		}
+		*/	
 	}
-	return true;
+	if (contMI == v0.tamano && contM>0)
+	{
+		return true;
+	}else
+	{
+		return false;
+	}
 }
 
 
