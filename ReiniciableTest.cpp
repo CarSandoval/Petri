@@ -41,6 +41,7 @@ int main()
 	}
 
 	//calculo reiniciabilidad
+
 	resp = tree.reiniciable();
 	
 	if(resp)
@@ -52,6 +53,7 @@ int main()
 		std::cout<<"No es reiniciable"<<std::endl;
 	}
 
+	list::purge();
 	resp = tree.vivacidad();
 	
 	if(resp)

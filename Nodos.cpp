@@ -180,9 +180,9 @@ void Nodo::addNodosVivos(vector vec0, bool bool0)
 	_Nodos nodos_vivos0;
 	nodos_vivos0.fill(vec0,bool0);
 	nodos_vivos->push_back(nodos_vivos0);
-	std:::cout<<"arbol::imprimirVec:\t";
-	arbol::imprimirVec((nodos_vivos->find_inside(nodos_vivos0.VECTOR)).VECTOR);
-	std::cout<<nodos_vivos->find_inside(nodos_vivos0.VECTOR).BOOL<<"\n";
+	//std::cout<<"arbol::imprimirVec:\t";
+	//arbol::imprimirVec((nodos_vivos->find_inside(nodos_vivos0.VECTOR)).VECTOR);
+	//std::cout<<nodos_vivos->find_inside(nodos_vivos0.VECTOR).BOOL<<"\n";
 }
 
 

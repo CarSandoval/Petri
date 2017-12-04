@@ -160,14 +160,32 @@ bool vector::operator >=(const vector &v1)
 
 bool vector::operator >(const vector &v1)
 {
+	int contMI, contM;
+	contMI = contM = 0;
 	for(int i=0;i<tamano;i++)
 	{
+		if(data[i]>=v1.data[i])
+		{
+			contMI++;
+		}
+		if (data[i]>v1.data[i])
+		{
+			contM++;
+		}
+		/*
 		if(data[i]<=v1.data[i])
 		{
 			return false;
-		}	
+		}
+		*/	
 	}
-	return true;
+	if (contMI == tamano && contM>0)
+	{
+		return true;
+	}else
+	{
+		return false;
+	}
 }
 
 bool vector::operator <=(const vector &v1)
@@ -184,14 +202,32 @@ bool vector::operator <=(const vector &v1)
 
 bool vector::operator <(const vector &v1)
 {
+	int contMI, contM;
+	contMI = contM = 0;
 	for(int i=0;i<tamano;i++)
 	{
-		if(data[i]>=v1.data[i])
+		if(data[i]<=v1.data[i])
+		{
+			contMI++;
+		}
+		if (data[i]<v1.data[i])
+		{
+			contM++;
+		}
+		/*
+		if(data[i]<=v1.data[i])
 		{
 			return false;
-		}	
+		}
+		*/	
 	}
-	return true;
+	if (contMI == tamano && contM>0)
+	{
+		return true;
+	}else
+	{
+		return false;
+	}
 }
 
 bool vector::operator ==(const vector &v1)

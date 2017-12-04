@@ -24,7 +24,9 @@ arbol::arbol(int* marcado, int t, int p)
     int* aux = new int[p];
 
     //Arreglo auxiliar para calcular el marcado maximo
-    int arr_max[m] = {0};  
+    int arr_max[m] = {0};
+    int unos[n] = {1};
+    uno = new vector(unos,n);  
 
     pre = new vector[t];
     post = new vector[t];
@@ -318,9 +320,9 @@ bool arbol::reiniciableAux(Nodo* aux)
 {
 	//para saber si sigue siendo verdad
 	static bool bandera = true;
-	std::cout<<"marcado: ";
-	imprimirVec(aux->getMarcado());
-	std::cout<<aux->getExplorado(aux->getMarcado())<<std::endl;
+	//std::cout<<"marcado: ";
+	//imprimirVec(aux->getMarcado());
+	//std::cout<<aux->getExplorado(aux->getMarcado());
 	
 
 	//para saber si sigo teniendo posibilidad de reiniciabilidad
@@ -412,9 +414,13 @@ bool arbol::vivacidadAux(Nodo* aux)
 {
     //para saber si sigue siendo verdad
     static bool bandera = true;
-    std::cout<<"marcado: ";
-    imprimirVec(aux->getMarcado());
-    std::cout<<aux->getExploradoVivo(aux->getMarcado())<<std::endl;
+    //std::cout<<"marcado: ";
+    //imprimirVec(aux->getMarcado());
+    //std::cout<<aux->getExploradoVivo(aux->getMarcado())<<std::endl;
+
+    //std::cout<<"marcado diparos papa: ";
+    //imprimirVec(aux->getDisparos());
+    //std::cout<<aux->getExploradoVivo(aux->getMarcado())<<std::endl;
     
 
     //para saber si sigo teniendo posibilidad de reiniciabilidad
@@ -441,26 +447,39 @@ bool arbol::vivacidadAux(Nodo* aux)
         
         //obtengo el hijo correspondiente y lo asigno a hijo
         hijo = (aux->getHijos())[i];
-        
+
+        //std::cout<<"marcado hijo  "<<i<<": ";
+        //imprimirVec(hijo->getDisparos());
+        aux->setDisparos(aux->getDisparos() + hijo->getDisparos());
+
+        //std::cout<<"marcado suma  "<<i<<": ";
+        //imprimirVec(aux->getDisparos());
         //si mi hijo tiene solucion y lo sabe, yo tengo solucion
-        if(hijo->getVivo() || hijo->getMarcado()==raiz->getMarcado())
+        if(hijo->getVivo() || aux->getDisparos()>=uno)
         {
+            //std::cout << "Entre 1" << std::endl;
             aux->setVivo(true);
             //return bandera;
         }
         
+        //std::cout << "Lista de vivacidad: " << std::endl;
+        //list::imprimir();
         //si ya habia explorado a mi hijo
         if(aux->getExploradoVivo(hijo->getMarcado()))
         {
+            //std::cout << "Entre 2" << std::endl;
             continue;
         }
         
         //sino, exploro a mi hijo
         if(vivacidadAux((aux->getHijos())[i]))
         {
+            //std::cout << "Entre 3" << std::endl;
+            hijo->setVivo(true);
             aux->setVivo(true);
             //return bandera;           
         }
+        aux->setDisparos(aux->getDisparos() + hijo->getDisparos());
         
     }
     for(int i=0;i<this->n;i++)

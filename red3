@@ -1,10 +1,10 @@
-//RED01 (acotada y reiniciable) -- funciona
+//RED01 (viva, acotada y reiniciable) -- funciona
 1 1
 1
 1
 1
 
-//RED02 (acotada y no reiniciable)--no funciona el acotamiento
+//RED02 (no-viva, acotada y no reiniciable)--no funciona el acotamiento
 2
 2
 1 0
@@ -14,7 +14,7 @@
 0 1
 
 
-//RED03 (no acotada y no reiniciable) -- funciona
+//RED03 (viva, no acotada y no reiniciable) -- funciona
 4 3
 1 0 0 
 1 0 0
@@ -26,7 +26,7 @@
 1 0 0
 1 0 0
 
-//RED04 (no acotado y reiniciable) -- funciona
+//RED04 (viva, no acotado y reiniciable) -- funciona
 2 1
 1
 1
@@ -35,5 +35,15 @@
 1
 
 
-
+//RED05 (viva, no-reiniciable, no-acotada)
+4 4
+1 0 0 0
+1 0 0 0
+0 1 0 0
+0 0 1 0
+0 0 0 1
+0 1 1 0
+1 0 0 0
+0 0 0 1
+0 0 1 0
 
