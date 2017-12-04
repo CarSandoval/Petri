@@ -31,8 +31,8 @@ arbol::arbol(int* marcado, int t, int p)
         unos[i]=1;
     }
     uno = new vector(unos,n);
-    std::cout <<"Vector uno: "; 
-    imprimirVec(uno);
+    //std::cout <<"Vector uno: "; 
+    //  imprimirVec(uno);
 
     pre = new vector[t];
     post = new vector[t];
@@ -103,13 +103,13 @@ arbol::arbol(int* marcado, int t, int p)
 
     raiz = direccion->consulta(marcadoI, NULL, &repetido);
         //std::cout << "Bandera" << std::endl;
-    std::cout << "Marcado Maximo: " << val_max;
+    //std::cout << "Marcado Maximo: " << val_max;
             //marcado2 = raiz->getMarcado();
             /*for (int k = 0; k < m; ++k)
             {
                 std::cout << maximo.get(k);
             }*/
-            std::cout << std::endl;
+      //      std::cout << std::endl;
 
 /*
     std::cout << "Marcado Maximo: " ;
@@ -131,6 +131,7 @@ arbol::arbol(int* marcado, int t, int p)
     }
     std::cout<<std::endl;*/
 
+/*
     std::cout << "Marcado inicial Nodo: " ;
             marcado3 = raiz->getMarcado();
             for (int k = 0; k < m; ++k)
@@ -138,7 +139,7 @@ arbol::arbol(int* marcado, int t, int p)
                 std::cout << marcado3.get(k);
             }
             std::cout << std::endl;
-
+*/
     check_t(raiz);
 
 }
@@ -172,31 +173,31 @@ void arbol::check_t(Nodo* nodo){
         marcado_aux = nodo->getMarcado();
         if (pre[i]<=marcado_aux)
         {
-            std::cout << "T" << i <<": Activa" << std::endl;
+            //std::cout << "T" << i <<": Activa" << std::endl;
             //Calcula el nuevo etiquetado al activarse la transición "i"
             marcado_aux -= pre[i];
             marcado_aux += post[i];
-            std::cout << "Marcado T" << i <<": " ;
-            for (int k = 0; k < m; ++k)
+            //std::cout << "Marcado T" << i <<": " ;
+            /*for (int k = 0; k < m; ++k)
             {
                 std::cout << marcado_aux.get(k)<<",";
             }
-            std::cout << std::endl;
+            std::cout << std::endl;*/
             
             repetido = false;
             Nodo* hijo = direccion->consulta(marcado_aux,nodo,&repetido);
             
-            std::cout << "Hasta aqui" << std::endl;
+            //std::cout << "Hasta aqui" << std::endl;
             if (repetido)
             {
                 nodo->setHijo(hijo,i);
-                std::cout << "T" << i <<": Repetido" << std::endl;
+                //std::cout << "T" << i <<": Repetido" << std::endl;
             }else{
                 //arr_hijos[i] = hijo;
                 hijo->setPadre(nodo);
                 nodo->setHijo(hijo,i);
-                std::cout << "Hasta aqui2" << std::endl;
-                std::cout << "Padre e hijo relacionados " << i << std::endl ;
+                //std::cout << "Hasta aqui2" << std::endl;
+                //std::cout << "Padre e hijo relacionados " << i << std::endl ;
                 
                 check_t(hijo);
                 
@@ -205,7 +206,7 @@ void arbol::check_t(Nodo* nodo){
         
         //No se pudo activar la transición "i"
         else{
-            std::cout << "T" << i <<": No activa" << std::endl;
+            //std::cout << "T" << i <<": No activa" << std::endl;
 
         }
         //prueba(arr_hijos);
@@ -324,6 +325,7 @@ bool arbol::getAcotado()
 
 bool arbol::reiniciableAux(Nodo* aux)
 {
+    int null_reini=0;
 	//para saber si sigue siendo verdad
 	static bool bandera = true;
 	//std::cout<<"marcado: ";
@@ -383,15 +385,16 @@ bool arbol::reiniciableAux(Nodo* aux)
 		}
 		
 	}
-    std::cout<<"Marcado Actual: ";
+    /*std::cout<<"Marcado Actual: ";
     imprimirVec(aux->getMarcado());
     std::cout << std::endl;
-    std::cout << "Ciclico? :" << aux->getCiclo() <<std::endl;
+    std::cout << "Ciclico? :" << aux->getCiclo() <<std::endl;*/
 	for(int i=0;i<this->n;i++)
 	{
 		//si no tengo hijo i
 		if((aux->getHijos())[i]==NULL)
 		{
+            null_reini++;
 			continue;
 		}
 		Nodo* hijo;
@@ -400,22 +403,26 @@ bool arbol::reiniciableAux(Nodo* aux)
 		if(hijo->getCiclo()==false)
 		{
 			bandera = false;
-            std::cout<<"Retorno FALSO: ";
-            imprimirVec(hijo->getMarcado());
+            /*std::cout<<"Retorno FALSO: ";
+            imprimirVec(hijo->getMarcado());*/
 			return false;
 		}
 		
 	}
 	//si no tengo posibilidades de vivacidad
 	//bandera = false;
+    if (null_reini == n)
+    {
+        return false;
+    }
 	return true;
 }
 
 bool arbol::reiniciable()
 {
-	std::cout<<"Comence1\n";
+	//std::cout<<"Comence1\n";
 	return reiniciableAux(raiz);
-	std::cout<<"fincalice1\n";
+	//std::cout<<"fincalice1\n";
 }
 
 void arbol::imprimirVec(vector a)
@@ -520,15 +527,15 @@ bool arbol::vivacidadAux(Nodo* aux)
         Nodo* hijo;
         //obtengo el hijo correspondiente y lo asigno a hijo
         hijo = (aux->getHijos())[i];
-        std::cout << "Marcado :";
+        /*std::cout << "Marcado :";
         imprimirVec(hijo->getMarcado());
         imprimirVec(hijo->getDisparos());
         imprimirVec(uno);
-        std::cout << "Vivo? :" <<hijo->getVivo() << std::endl;
+        std::cout << "Vivo? :" <<hijo->getVivo() << std::endl;*/
         if(hijo->getVivo()==false)
         {
-            std::cout<<"Marcado FALSO: ";
-            imprimirVec(hijo->getMarcado());
+            /*std::cout<<"Marcado FALSO: ";
+            imprimirVec(hijo->getMarcado());*/
             bandera = false;
             return false;
         }
@@ -536,8 +543,8 @@ bool arbol::vivacidadAux(Nodo* aux)
     }
     if (null_cont == n)
     {
-        std::cout<<"Marcado no vivo: ";
-        imprimirVec(aux->getMarcado());
+        //std::cout<<"Marcado no vivo: ";
+        //imprimirVec(aux->getMarcado());
         return false;
     }
     //si no tengo posibilidades de vivacidad
@@ -547,7 +554,7 @@ bool arbol::vivacidadAux(Nodo* aux)
 
 bool arbol::vivacidad()
 {
-    std::cout<<"Vivacidad inicio\n";
+    //std::cout<<"Vivacidad inicio\n";
     return vivacidadAux(raiz);
-    std::cout<<"Vivacidad final\n";
+    //std::cout<<"Vivacidad final\n";
 }

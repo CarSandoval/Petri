@@ -103,6 +103,10 @@ vector& vector::operator+(const vector &v1)
 	for(int i=0;i<tamano;i++)
 	{
 		resp->data[i]+=data[i];
+		if (resp->data[i]>200000)
+		{
+			resp->data[i]=200000;
+		}
 	}
 
 	return *resp;
@@ -130,6 +134,10 @@ void vector::operator+=(const vector &v1)
 	for(int i=0;i<tamano && i<v1.tamano;i++)
 	{
 		data[i]+= v1.data[i];
+		if (data[i]>200000)
+		{
+			data[i]=200000;
+		}
 	}
 
 }

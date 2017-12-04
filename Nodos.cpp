@@ -171,8 +171,8 @@ void Nodo::addNodosCreados(vector vec0, bool bool0)
 	_Nodos nodos_creados0;
 	nodos_creados0.fill(vec0,bool0);
 	nodos_creados->push_back(nodos_creados0);
-	arbol::imprimirVec((nodos_creados->find_inside(nodos_creados0.VECTOR)).VECTOR);
-	std::cout<<nodos_creados->find_inside(nodos_creados0.VECTOR).BOOL<<"\n";
+	//arbol::imprimirVec((nodos_creados->find_inside(nodos_creados0.VECTOR)).VECTOR);
+	//std::cout<<nodos_creados->find_inside(nodos_creados0.VECTOR).BOOL<<"\n";
 }
 
 void Nodo::addNodosVivos(vector vec0, bool bool0)

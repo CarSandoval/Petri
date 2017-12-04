@@ -1,6 +1,6 @@
 #include<iostream>
 #include"Arbol.h"
-//#include"Nodos.hpp"
+#include"Nodos.hpp"
 
 //using namespace std;
 
@@ -28,9 +28,10 @@ int main()
 	arbol tree(marcado,t,p);
 
 	//auxiliar para la respuesta de reiniciabilidad
-	bool resp;
+	bool resp, resp2;
 
-	std::cout<<"Es acotado:? ";
+	int no_nodos = Nodo::getNodos();
+	std::cout<<"Es acotado?: ";
 	if(tree.getAcotado())
 	{
 		std::cout<<"Si\n";
@@ -42,29 +43,41 @@ int main()
 
 	//calculo reiniciabilidad
 
-	resp = tree.reiniciable();
+	for (int i = 0; i < no_nodos; ++i)
+	{
+		list::purge();
+		resp = tree.reiniciable();
+	}
 	
-	if(resp)
-	{
-		std::cout<<"Es reiniciable"<<std::endl;
-	}
-	else
-	{
-		std::cout<<"No es reiniciable"<<std::endl;
-	}
+	
+	
 
-	list::purge();
-	resp = tree.vivacidad();
-	
-	if(resp)
+
+	for (int i = 0; i < no_nodos; ++i)
 	{
-		std::cout<<"Es Viva"<<std::endl;
+		list::purge();
+		resp2 = tree.vivacidad();
+	}
+	
+	std::cout<<"Esta viva?: ";
+	if(resp2)
+	{
+		std::cout<<"Si"<<std::endl;
 	}
 	else
 	{
-		std::cout<<"No es Viva"<<std::endl;
+		std::cout<<"No"<<std::endl;
 	}
 	
+	std::cout<<"Es reiniciable?: ";
+	if(resp)
+	{
+		std::cout<<"Si"<<std::endl;
+	}
+	else
+	{
+		std::cout<<"No"<<std::endl;
+	}
 	//tree = new arbol(marcado,4,3);
 	return 0;
 }
