@@ -6,17 +6,17 @@
 
 arbol::arbol()
 {
-	n=0;
+    n=0;
     m=0;
 }
 
-arbol::arbol(int* marcado, int t, int p)
+arbol::arbol(int* marcado, int t, int p,vector* pre_arr,vector* post_arr)
 {
     //Hijos pendientes
     //Nodo* arr_hijos[n];
 
-	//Transiciones
-	n=t;
+    //Transiciones
+    n=t;
 
     //Lugares
     m=p;
@@ -47,13 +47,13 @@ arbol::arbol(int* marcado, int t, int p)
     
     //std::cout << "Aqui nodos";
     // Creación de arreglo de vectores PRE
-    for (int i = 0; i < t; ++i)
+    /*for (int i = 0; i < t; ++i)
     {
         std::cout << "Pre T " << i;
         for (int j = 0; j < p; ++j)
         {
             std::cin >> aux[j];
-	    //getline(std::cin, aux[j]);
+        //getline(std::cin, aux[j]);
         }
         pre[i]=new vector(aux,p);
     }
@@ -65,10 +65,13 @@ arbol::arbol(int* marcado, int t, int p)
         for (int j = 0; j < p; ++j)
         {
             std::cin >> aux[j];
-	    //getline(std::cin,aux[j]);
+        //getline(std::cin,aux[j]);
         }
         post[i]=new vector(aux,p);
-    }
+    }*/
+
+    pre = pre_arr;
+    post = post_arr;
 
     //Obtener marcado maximo del arreglo pre
     for (int i = 0; i < m; ++i)
@@ -320,123 +323,123 @@ arbol::check_t(vector marcado){
 
 bool arbol::getAcotado()
 {
-	return direccion->getAcotado();
+    return direccion->getAcotado();
 }
 
 bool arbol::reiniciableAux(Nodo* aux)
 {
     int null_reini=0;
-	//para saber si sigue siendo verdad
-	static bool bandera = true;
-	//std::cout<<"marcado: ";
-	//imprimirVec(aux->getMarcado());
-	//std::cout<<aux->getExplorado(aux->getMarcado());
-	
+    //para saber si sigue siendo verdad
+    static bool bandera = true;
+    //std::cout<<"marcado: ";
+    //imprimirVec(aux->getMarcado());
+    //std::cout<<aux->getExplorado(aux->getMarcado());
+    
 
-	//para saber si sigo teniendo posibilidad de reiniciabilidad
-	if(!bandera)
-	{
-		//return false;
-	}
+    //para saber si sigo teniendo posibilidad de reiniciabilidad
+    if(!bandera)
+    {
+        //return false;
+    }
 
-	for(int i=0;i<(this->n);i++)
-	{
-		//std::cout<<"Estoy en el ciclo "<<i<<"\n";
-		//variable para hijo temporal		
-		Nodo* hijo;		
-		
-		//marco explorado el nodo	
-		aux->setExplorado(aux->getMarcado(),true);
-		
+    for(int i=0;i<(this->n);i++)
+    {
+        //std::cout<<"Estoy en el ciclo "<<i<<"\n";
+        //variable para hijo temporal       
+        Nodo* hijo;     
+        
+        //marco explorado el nodo   
+        aux->setExplorado(aux->getMarcado(),true);
+        
 
-		//si no tengo hijo i
-		if((aux->getHijos())[i]==NULL)
-		{
-			continue;
-		}
-		
-		//obtengo el hijo correspondiente y lo asigno a hijo
-		hijo = (aux->getHijos())[i];
-		
-		//si mi hijo tiene solucion y lo sabe, yo tengo solucion
-		if(hijo->getCiclo())
-		{
-			aux->setCiclo(true);
-			//return bandera;
-		}
+        //si no tengo hijo i
+        if((aux->getHijos())[i]==NULL)
+        {
+            continue;
+        }
+        
+        //obtengo el hijo correspondiente y lo asigno a hijo
+        hijo = (aux->getHijos())[i];
+        
+        //si mi hijo tiene solucion y lo sabe, yo tengo solucion
+        if(hijo->getCiclo())
+        {
+            aux->setCiclo(true);
+            //return bandera;
+        }
 
         if (hijo->getMarcado()==raiz->getMarcado())
         {
             aux->setCiclo(true);
             raiz->setCiclo(true);
         }
-		
-		//si ya habia explorado a mi hijo
-		if(aux->getExplorado(hijo->getMarcado()))
-		{
-			continue;
-		}
-		
-		//sino, exploro a mi hijo
-		if(reiniciableAux((aux->getHijos())[i]))
-		{
-			aux->setCiclo(true);
-			//return bandera;			
-		}
+        
+        //si ya habia explorado a mi hijo
+        if(aux->getExplorado(hijo->getMarcado()))
+        {
+            continue;
+        }
+        
+        //sino, exploro a mi hijo
+        if(reiniciableAux((aux->getHijos())[i]))
+        {
+            aux->setCiclo(true);
+            //return bandera;           
+        }
 
-		
-	}
+        
+    }
     /*std::cout<<"Marcado Actual: ";
     imprimirVec(aux->getMarcado());
     std::cout << std::endl;
     std::cout << "Ciclico? :" << aux->getCiclo() <<std::endl;*/
-	for(int i=0;i<this->n;i++)
-	{
-		//si no tengo hijo i
-		if((aux->getHijos())[i]==NULL)
-		{
+    for(int i=0;i<this->n;i++)
+    {
+        //si no tengo hijo i
+        if((aux->getHijos())[i]==NULL)
+        {
             null_reini++;
-			continue;
-		}
-		Nodo* hijo;
-		//obtengo el hijo correspondiente y lo asigno a hijo
-		hijo = (aux->getHijos())[i];
+            continue;
+        }
+        Nodo* hijo;
+        //obtengo el hijo correspondiente y lo asigno a hijo
+        hijo = (aux->getHijos())[i];
         //std::cout<<"Hijos ciclos: [";
         //imprimirVec(hijo->getMarcado());
         //std::cout<<"]->"<<hijo->getCiclo()<<std::endl;
-		if(hijo->getCiclo()==false)
-		{
-			bandera = false;
+        if(hijo->getCiclo()==false)
+        {
+            bandera = false;
             /*std::cout<<"Retorno FALSO: ";
             imprimirVec(hijo->getMarcado());*/
-			return false;
-		}
-		
-	}
-	//si no tengo posibilidades de vivacidad
-	//bandera = false;
+            return false;
+        }
+        
+    }
+    //si no tengo posibilidades de vivacidad
+    //bandera = false;
 
     if (null_reini >= n)
     {
         return false;
     }
-	return true;
+    return true;
 }
 
 bool arbol::reiniciable()
 {
-	//std::cout<<"Comence1\n";
-	return reiniciableAux(raiz);
-	//std::cout<<"fincalice1\n";
+    //std::cout<<"Comence1\n";
+    return reiniciableAux(raiz);
+    //std::cout<<"fincalice1\n";
 }
 
 void arbol::imprimirVec(vector a)
 {
-	for(int i=0;i<a.size();i++)
-	{
-		std::cout<<a.get(i)<<",";
-	}
-	std::cout<<"\n";
+    for(int i=0;i<a.size();i++)
+    {
+        std::cout<<a.get(i)<<",";
+    }
+    std::cout<<"\n";
 }
 
 

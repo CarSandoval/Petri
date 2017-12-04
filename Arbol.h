@@ -25,7 +25,7 @@ class arbol
         vector max;
         
         arbol();
-        arbol(int* marcado, int t, int p);
+        arbol(int* marcado, int t, int p, vector* pre_arr,vector* post_arr);
         //void set(int i);
         //void get(int i);
         //int size();
@@ -34,12 +34,12 @@ class arbol
         void check_t(Nodo* nodo);
         //void prueba(Nodo* arr[]);
 
-	bool reiniciableAux(Nodo* aux);
-	bool reiniciable();
+    bool reiniciableAux(Nodo* aux);
+    bool reiniciable();
     bool vivacidadAux(Nodo* nodo);
     bool vivacidad();
-	bool getAcotado();
-	static void imprimirVec(vector a);
+    bool getAcotado();
+    static void imprimirVec(vector a);
 
 
 };
