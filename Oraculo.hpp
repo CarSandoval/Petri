@@ -30,6 +30,8 @@ public:
 	~Oraculo();
 	Nodo *consulta(vector marcado0, Nodo *padre, bool *repetido);
 	bool getAcotado();
+	bool findCiclo();
+	bool findVivo();
 	
 };
 

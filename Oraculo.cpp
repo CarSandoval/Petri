@@ -144,3 +144,33 @@ Nodo* Oraculo::find(vector marcado0)
 	}
 	return NULL;
 }
+
+bool Oraculo::findCiclo()
+{
+	std::vector<_Nodos>::iterator i;
+	Nodo* aux;
+	for(i=nodos.begin();i!=nodos.end();i++)
+	{
+			aux = i->NODO;
+			if(!aux->getCiclo())
+			{
+				return false;
+			}
+	}
+	return true;
+}
+
+bool Oraculo::findVivo()
+{
+	std::vector<_Nodos>::iterator i;
+	Nodo* aux;
+	for(i=nodos.begin();i!=nodos.end();i++)
+	{
+			aux = i->NODO;
+			if(!aux->getVivo())
+			{
+				return false;
+			}
+	}
+	return true;
+}

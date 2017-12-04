@@ -10,12 +10,13 @@ class arbol
         vector marcado_aux;
         vector maximo;
         vector uno;
-        Oraculo* direccion;
+        
         bool repetido;
         int val_max;
 
         
     public:
+        Oraculo* direccion;
         Nodo* raiz;
         int n,m;
         vector* pre;
@@ -39,6 +40,7 @@ class arbol
     bool vivacidad();
 	bool getAcotado();
 	static void imprimirVec(vector a);
+
 
 };
 

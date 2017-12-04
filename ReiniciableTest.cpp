@@ -47,8 +47,9 @@ int main()
 	{
 		list::purge();
 		resp = tree.reiniciable();
+		//std::cout<<"---------------------------"<<i<<"-----------------------------"<<std::endl;
 	}
-	
+	resp = tree.direccion->findCiclo();
 	
 	
 
@@ -59,6 +60,8 @@ int main()
 		resp2 = tree.vivacidad();
 	}
 	
+	resp2 = tree.direccion->findVivo();
+
 	std::cout<<"Esta viva?: ";
 	if(resp2)
 	{

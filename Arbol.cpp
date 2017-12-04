@@ -383,6 +383,7 @@ bool arbol::reiniciableAux(Nodo* aux)
 			aux->setCiclo(true);
 			//return bandera;			
 		}
+
 		
 	}
     /*std::cout<<"Marcado Actual: ";
@@ -400,6 +401,9 @@ bool arbol::reiniciableAux(Nodo* aux)
 		Nodo* hijo;
 		//obtengo el hijo correspondiente y lo asigno a hijo
 		hijo = (aux->getHijos())[i];
+        //std::cout<<"Hijos ciclos: [";
+        //imprimirVec(hijo->getMarcado());
+        //std::cout<<"]->"<<hijo->getCiclo()<<std::endl;
 		if(hijo->getCiclo()==false)
 		{
 			bandera = false;
@@ -411,7 +415,8 @@ bool arbol::reiniciableAux(Nodo* aux)
 	}
 	//si no tengo posibilidades de vivacidad
 	//bandera = false;
-    if (null_reini == n)
+
+    if (null_reini >= n)
     {
         return false;
     }
