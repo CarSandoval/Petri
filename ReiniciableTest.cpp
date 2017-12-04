@@ -155,6 +155,7 @@ int main()
 	{
 		std::cout<<"No"<<std::endl;
 	}
+	tree.direccion->doGraph();
 	//tree = new arbol(marcado,4,3);
 	return 0;
 }
