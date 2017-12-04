@@ -32,6 +32,7 @@ public:
 	bool getAcotado();
 	bool findCiclo();
 	bool findVivo();
+	void doGraph();
 	
 };
 

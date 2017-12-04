@@ -1,5 +1,8 @@
 #include "Oraculo.hpp"
 
+#include <iostream>
+#include <fstream>
+
 Oraculo::Oraculo(vector max0, int max_disparos0, int maximus0)
 {
 	max = max0;
@@ -158,6 +161,62 @@ bool Oraculo::findCiclo()
 			}
 	}
 	return true;
+}
+
+void Oraculo::doGraph()
+{
+	//para imprimir
+	std::ofstream myfile;
+	myfile.open ("grafo.dot");
+	//para todo lo demas
+	std::vector<_Nodos>::iterator i;
+	Nodo* aux;
+	myfile<<"digraph G {\n";
+	for(i=nodos.begin();i!=nodos.end();i++)
+	{
+			aux = i->NODO;
+			vector vectorAux, vectorHijo;
+			Nodo* hijo;
+			vectorAux = aux->getMarcado();
+			for(int i=0;i<max_disparos;i++)
+			{
+				
+				if((aux->getHijos())[i]==NULL)
+				{
+					continue;
+				}
+				hijo = (aux->getHijos())[i];
+				vectorHijo = hijo->getMarcado();
+				
+				//imrpimo Cabecera				
+				myfile<<"marcado_";				
+				
+				//imprimo marcado papa
+				for(int i=0;i<vectorAux.size()-1;i++)
+				{
+					myfile<<vectorAux.get(i)<<"_";
+				}
+				myfile<<vectorAux.get(vectorAux.size()-1)<<"";
+
+				//imprimo intermedio
+				myfile<<" -> ";
+
+				//imprimo marca hijo
+				myfile<<"marcado_";				
+				for(int i=0;i<vectorHijo.size()-1;i++)
+				{
+					myfile<<vectorHijo.get(i)<<"_";
+				}
+				myfile<<vectorHijo.get(vectorHijo.size()-1)<<"";
+				myfile<<";\n";
+
+			}
+		
+	}
+	myfile<<"}\n";
+	myfile.close();
+	system("dot -Tpng grafo.dot -o grafo.png");
+	system("nohup display grafo.png &" );
 }
 
 bool Oraculo::findVivo()
