@@ -9,6 +9,7 @@ class arbol
     private:
         vector marcado_aux;
         vector maximo;
+        vector uno;
         Oraculo* direccion;
         bool repetido;
         int val_max;
