@@ -227,6 +227,7 @@ Nodo::Nodo(int max_disparo0, vector marcado_init)
 	addNodosCreados(marcado_init,false);
 
 	disparos = new vector(ceros,max_disparo0);
+	myr = new vector(ceros,max_disparo0);
 	addNodosVivos(disparos,false);
 	//disparos = *disparos0;
 	hijos.resize(max_disparo0);
@@ -252,6 +253,18 @@ Nodo::Nodo(Nodo *padre0, vector marcado0)
 }
 
 Nodo::~Nodo(){}
+
+
+void Nodo::addMyr(vector myr0)
+{
+	myr = myr0;
+}
+
+vector Nodo::getMyr()
+{
+	return myr;
+}
+
 
 bool Nodo::nuevo_hijo(Nodo *nuevo_hijo0, int disparo)
 {

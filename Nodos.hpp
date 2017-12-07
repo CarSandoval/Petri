@@ -48,6 +48,7 @@ class Nodo
 	std::vector<Nodo*> hijos;
 	vector disparos;
 	vector marcado;
+	vector myr;
 
 	
 	void addNodosCreados(vector vec0, bool bool0);
@@ -67,6 +68,8 @@ public:
 	Nodo(vector marcado0);
 	Nodo(int max_disparo0, vector marcado_init);
 	Nodo(Nodo *padre, vector marcado0);
+	void addMyr(vector myr0);
+	vector getMyr();
 	bool nuevo_hijo(Nodo *nuevo_hijo0, int disparo);
 	void setCiclo(bool ciclo0);
 	bool getCiclo();

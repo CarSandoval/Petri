@@ -1,5 +1,5 @@
 #include "Oraculo.hpp"
-
+#include "Arbol.h"
 #include <iostream>
 #include <fstream>
 
@@ -16,6 +16,7 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 	*repetido = false;
 	std::vector<_Nodos>::iterator i;
 	Nodo* aux_padre;
+	vector myr;
 
 
 
@@ -32,6 +33,8 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 				{
 					acotado = false;
 				}
+				//myr = marcado0.mayor(padre->getMarcado());
+				//padre->addMyr(myr);
 				for(int j=0;j<marcado0.size();j++)
 				{
 					if(marcado0.get(j)>maximus)
@@ -46,8 +49,13 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 	}
 	if(exist(marcado0))
 	{
+		Nodo* lala;
 		*repetido = true;
-		return find(marcado0);
+		lala = find(marcado0);
+		vector omega;
+		omega = marcado0.mayor(padre->getMarcado());
+		lala->addMyr(omega);
+		return lala;
 	}
 	else
 	{
@@ -56,6 +64,12 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 		nodo_nuevo.VECTOR = marcado0;
 		nodo_nuevo.NODO = nuevo;
 		nodos.push_back(nodo_nuevo);
+		if(padre!=NULL)
+		{
+			vector omega;
+			omega = marcado0.mayor(padre->getMarcado());
+			nuevo->addMyr(omega);
+		}
 		return nuevo;
 	}
 	return padre;	
@@ -166,18 +180,55 @@ bool Oraculo::findCiclo()
 void Oraculo::doGraph()
 {
 	//para imprimir
-	std::ofstream myfile;
-	myfile.open ("grafo.dot");
+	std::vector<std::string> myfile0;
+	myfile0.resize(Nodo::getNodos());
+	std::ofstream myfileout;
+	int fn = 0;
+	//myfile.open ("grafoin");
+	myfileout.open("grafo.dot");
 	//para todo lo demas
 	std::vector<_Nodos>::iterator i;
 	Nodo* aux;
-	myfile<<"digraph G {\n";
+	std::string myfile;
+	//myfile+="digraph G {\n";
 	for(i=nodos.begin();i!=nodos.end();i++)
 	{
 			aux = i->NODO;
 			vector vectorAux, vectorHijo;
 			Nodo* hijo;
 			vectorAux = aux->getMarcado();
+			int omega[vectorAux.size()] = {0};
+			/*for (int w = 0; w < Nodo::getNodos(); ++w)
+			{
+				Nodo* current_aux;
+				current_aux = aux->getPadre();
+				vector marcado1;
+				vector marcado2;
+				std::cout<<"MArcado actual:\t";
+				arbol::imprimirVec(vectorAux);
+				while(current_aux != NULL)
+				{
+					marcado1 = aux->getMarcado();
+					marcado2 = current_aux->getMarcado();
+					std::cout<<"MArcado checado:\t";
+					arbol::imprimirVec(marcado2);
+					if(marcado1 >= marcado2)
+					{
+						std::cout<<"MArcado mayorixads:\t";
+						arbol::imprimirVec(marcado2);
+						for (int i = 0; i < marcado1.size(); ++i)
+						{
+							if(marcado1.get(i) > marcado2.get(i))
+								omega[i] = 1;
+						}
+						vector auxaxu(omega,marcado1.size());
+						arbol::imprimirVec(auxaxu);
+						break;
+					}
+					current_aux = current_aux->getPadre();
+				}
+			}*/
+
 			for(int i=0;i<max_disparos;i++)
 			{
 				
@@ -187,34 +238,79 @@ void Oraculo::doGraph()
 				}
 				hijo = (aux->getHijos())[i];
 				vectorHijo = hijo->getMarcado();
+
 				
 				//imrpimo Cabecera				
-				myfile<<"marcado_";				
+				myfile+="\"[ ";				
 				
 				//imprimo marcado papa
 				for(int i=0;i<vectorAux.size()-1;i++)
 				{
-					myfile<<vectorAux.get(i)<<"_";
+					if(aux->getMyr().get(i) == 1)
+					{
+						myfile+="w ";
+					}
+					else
+					{
+						myfile+=vectorAux.get(i)+'0';
+						myfile+=" ";
+					}
 				}
-				myfile<<vectorAux.get(vectorAux.size()-1)<<"";
+				myfile+=vectorAux.get(vectorAux.size()-1)+'0';
+				myfile+=" ]\"";
 
 				//imprimo intermedio
-				myfile<<" -> ";
+				myfile+=" -> ";
 
 				//imprimo marca hijo
-				myfile<<"marcado_";				
+				myfile+="\"[ ";				
+
 				for(int i=0;i<vectorHijo.size()-1;i++)
 				{
-					myfile<<vectorHijo.get(i)<<"_";
+					if(hijo->getMyr().get(i) == 1 || aux->getMyr().get(i) == 1)
+					{
+						myfile+="w ";
+					}
+					else
+					{
+						myfile+=vectorHijo.get(i)+'0';
+						myfile+=" ";
+					}
 				}
-				myfile<<vectorHijo.get(vectorHijo.size()-1)<<"";
-				myfile<<";\n";
-
+				myfile+=vectorHijo.get(vectorHijo.size()-1)+'0';
+				myfile+=" ]\"";
+				myfile+=" [label=\"t";
+				myfile+=(i+'0')+1;
+				myfile+="\"]";
+				myfile+=";\n";
+				myfile0.push_back(myfile);
+				myfile.clear();
 			}
 		
 	}
-	myfile<<"}\n";
-	myfile.close();
+	std::vector<std::string>::iterator str;
+	std::vector<std::string>::iterator str0;
+	for(str=myfile0.begin();str!=myfile0.end();++str)
+	{
+		for(str0=str+1;str0!=myfile0.end();++str0)
+		{
+			if(str->compare(*str0) == 0)
+			{
+				myfile0.erase(str0);
+			}
+			if(str+1==myfile0.end())
+				break;
+		}
+	}
+	myfile="digraph G {\n";
+	for(str=myfile0.begin();str!=myfile0.end();++str)
+	{
+		myfile+=*str;
+	}
+	myfile+="}\n";
+	std::cout<<myfile;
+	myfileout<<myfile.data();
+	myfileout.close();
 	system("dot -Tpng grafo.dot -o grafo.png");
 	system("nohup display grafo.png &" );
 }

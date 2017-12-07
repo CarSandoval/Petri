@@ -166,6 +166,22 @@ bool vector::operator >=(const vector &v1)
 	return true;
 }
 
+
+vector vector::mayor(const vector &v1)
+{
+	int om[tamano] = {0};
+	vector omega(om,tamano);
+	for(int i=0;i<tamano;i++)
+	{
+		if(data[i]>v1.data[i])
+		{
+			omega.set(i,1);
+		}	
+	}
+	return omega;
+}
+
+
 bool vector::operator >(const vector &v1)
 {
 	int contMI, contM;
@@ -264,6 +280,7 @@ bool operator >=(const vector &v0, const vector &v1)
 	}
 	return true;
 }
+
 
 bool operator >(const vector &v0, const vector &v1)
 {
