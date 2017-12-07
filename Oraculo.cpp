@@ -52,9 +52,9 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 		Nodo* lala;
 		*repetido = true;
 		lala = find(marcado0);
-		vector omega;
-		omega = marcado0.mayor(padre->getMarcado());
-		lala->addMyr(omega);
+		//vector omega;
+		//omega = marcado0.mayor(padre->getMarcado());
+		//lala->addMyr(omega);
 		return lala;
 	}
 	else
@@ -265,16 +265,35 @@ void Oraculo::doGraph()
 				//imprimo marca hijo
 				myfile+="\"[ ";				
 
-				for(int i=0;i<vectorHijo.size()-1;i++)
+				if((hijo->getPadre())->getMarcado() == aux->getMarcado())
 				{
-					if(hijo->getMyr().get(i) == 1 || aux->getMyr().get(i) == 1)
+					for(int i=0;i<vectorHijo.size()-1;i++)
 					{
-						myfile+="w ";
+
+						if(hijo->getMyr().get(i) == 1)// || aux->getMyr().get(i) == 1)
+						{
+							myfile+="w ";
+						}
+						else
+						{
+							myfile+=vectorHijo.get(i)+'0';
+							myfile+=" ";
+						}
 					}
-					else
+				}
+				else
+				{
+					for(int i=0;i<vectorHijo.size()-1;i++)
 					{
-						myfile+=vectorHijo.get(i)+'0';
-						myfile+=" ";
+						if(aux->getMyr().get(i) == 1)
+						{
+							myfile+="w ";
+						}
+						else
+						{
+							myfile+=vectorHijo.get(i)+'0';
+							myfile+=" ";
+						}
 					}
 				}
 				myfile+=vectorHijo.get(vectorHijo.size()-1)+'0';
