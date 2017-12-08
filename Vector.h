@@ -15,6 +15,8 @@ class vector
         int size();
         ~vector();
 
+        bool zeros();
+
         void operator =(const vector &v1);
 	void operator =(vector* v1);
         vector& operator *(const vector &v1);

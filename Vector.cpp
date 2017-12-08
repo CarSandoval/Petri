@@ -53,6 +53,21 @@ vector::~vector()
     //delete[] data;
 }
 
+
+bool vector::zeros()
+{
+	for (int i = 0; i < tamano; ++i)
+	{
+		if(data[i] != 0)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+
+
 //:::::::::::::operadores escenciales
 void vector::operator=(const vector &v1)
 {
