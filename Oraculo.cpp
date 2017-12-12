@@ -69,8 +69,9 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 				//padre->addMyr(myr);
 				for(int j=0;j<marcado0.size();j++)
 				{
-					if(marcado0.get(j)>maximus)
+					if(marcado0.get(j)>maximus && padre->getMarcado().get(j)>maximus)
 					{
+						std::cout<<"maximusssssss:   "<<maximus<<std::endl;
 						*repetido = true;
 						return padre;
 					}
@@ -281,7 +282,7 @@ void Oraculo::doGraph()
 				//imprimo marcado papa
 				for(int i=0;i<vectorAux.size();i++)
 				{
-					if(aux->getMyr().get(i) == 1)
+					if(0)//aux->getMyr().get(i) == 1)
 					{
 						myfile+="w ";
 					}
@@ -313,7 +314,7 @@ void Oraculo::doGraph()
 					for(int i=0;i<vectorHijo.size();i++)
 					{
 
-						if(hijo->getMyr().get(i) == 1 || aux->getMyr().get(i) == 1)
+						if(0)//hijo->getMyr().get(i) == 1 || aux->getMyr().get(i) == 1)
 						{
 							myfile+="w ";
 						}
@@ -328,7 +329,7 @@ void Oraculo::doGraph()
 				{
 					for(int i=0;i<vectorHijo.size();i++)
 					{
-						if(aux->getMyr().get(i) == 1)
+						if(0)//hijo->getPadre()!=NULL&&(hijo->getPadre())->getMyr().get(i) == 1 || aux->getMyr().get(i) == 1)
 						{
 							myfile+="w ";
 						}
@@ -359,6 +360,7 @@ void Oraculo::doGraph()
 			if(str->compare(*str0) == 0)
 			{
 				myfile0.erase(str0);
+				str0--;
 			}
 			if(str+1==myfile0.end())
 				break;
