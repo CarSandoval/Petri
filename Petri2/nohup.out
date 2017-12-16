@@ -1,0 +1,5 @@
+display: unable to open image `grafo.png': No such file or directory @ error/blob.c/OpenBlob/2712.
+display: unable to open file `grafo.png' @ error/png.c/ReadPNGImage/3919.
+display: no decode delegate for this image format `' @ error/constitute.c/ReadImage/501.
+display: improper image header `grafo.png' @ error/png.c/ReadPNGImage/3927.
+display: no decode delegate for this image format `' @ error/constitute.c/ReadImage/501.
