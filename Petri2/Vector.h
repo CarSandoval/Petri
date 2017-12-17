@@ -1,11 +1,14 @@
 #ifndef VECTOR_H_INCLUDED
 #define VECTOR_H_INCLUDED
 
+//#define OMEGA 72
+
 class vector
 {
     public:
         int* data;
         int tamano;
+        static const int OMEGA = 71;
     
         vector();
         vector(int* value, int n);

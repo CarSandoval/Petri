@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Arbol.h"
+#include <fstream>
 //#include "Nodos.hpp"
 //#include "Vector.h"
 //#include "Oraculo.hpp"
@@ -72,6 +73,8 @@ arbol::arbol(int* marcado, int t, int p,vector* pre_arr,vector* post_arr)
 
     pre = pre_arr;
     post = post_arr;
+
+    doPetri(*pre,*post);
 
     //Obtener marcado maximo del arreglo pre
     for (int i = 0; i < m; ++i)
@@ -150,6 +153,37 @@ arbol::arbol(int* marcado, int t, int p,vector* pre_arr,vector* post_arr)
 arbol::~arbol()
 {
     
+}
+
+void arbol::doPetri(vector pre0, vector post0)
+{
+    std::ofstream str;
+    str.open("petri.dot");
+    str<<"digraph G {\n";
+    for(int i=0; i<pre0.size(); i++)
+    {
+        for (int j = 0; j < pre0.size(); ++j)
+        {
+            str<<"p"<<pre0.get(j);
+            str<<" -> ";
+            str<<"t"<<i;
+            str<<";\n";
+        }
+    }
+    str<<"node [shape=rect];\n";
+    for(int i=0; i<post0.size(); i++)
+    {
+        for (int j = 0; j < post0.size(); ++j)
+        {
+            str<<"t"<<i;
+            str<<" -> ";
+            str<<"p"<<post0.get(j);
+            str<<";\n";
+        }
+    }
+    str<<"}";
+    str.close();
+
 }
 
 void arbol::check_t(Nodo* nodo){
@@ -439,7 +473,7 @@ void arbol::imprimirVec(vector a)
     {
         std::cout<<a.get(i)<<",";
     }
-    std::cout<<"\n";
+    std::cout<<"";
 }
 
 

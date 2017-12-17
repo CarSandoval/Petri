@@ -258,6 +258,13 @@ Nodo::~Nodo(){}
 void Nodo::addMyr(vector myr0)
 {
 	myr = myr0;
+	for(int i=0; i<myr0.size(); i++)
+	{
+		if(myr0.get(i)==1)
+		{
+			marcado.set(i,vector::OMEGA);
+		}
+	}
 }
 
 vector Nodo::getMyr()

@@ -50,6 +50,7 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 			{
 				mayor007=true;
 				marcado007=aux_padre->getMarcado();
+				break;
 			}
 			aux_padre=aux_padre->getPadre();
 		}
@@ -67,7 +68,7 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 				
 				//myr = marcado0.mayor(padre->getMarcado());
 				//padre->addMyr(myr);
-				for(int j=0;j<marcado0.size();j++)
+				/*for(int j=0;j<marcado0.size();j++)
 				{
 					if(marcado0.get(j)>maximus && padre->getMarcado().get(j)>maximus)
 					{
@@ -75,7 +76,7 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 						*repetido = true;
 						return padre;
 					}
-				}
+				}*/
 			}
 			padre = padre->getPadre();
 		}
@@ -89,6 +90,10 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 		{
 			vector omega;
 			omega = marcado0.mayor(marcado007);
+			if(!omega.zeros())
+			{
+				acotado = false;
+			}
 			lala->addMyr(omega);
 		}
 		return lala;
@@ -104,6 +109,10 @@ Nodo *Oraculo::consulta(vector marcado0, Nodo* padre, bool *repetido)
 		{
 			vector omega;
 			omega = marcado0.mayor(marcado007);
+			if(!omega.zeros())
+			{
+				acotado = false;
+			}
 			nuevo->addMyr(omega);
 		}
 		return nuevo;
@@ -282,7 +291,7 @@ void Oraculo::doGraph()
 				//imprimo marcado papa
 				for(int i=0;i<vectorAux.size();i++)
 				{
-					if(0)//aux->getMyr().get(i) == 1)
+					if(aux->getMarcado().get(i) == vector::OMEGA)
 					{
 						myfile+="w ";
 					}
@@ -301,43 +310,17 @@ void Oraculo::doGraph()
 				//imprimo marca hijo
 				myfile+="\"[ ";				
 
-				if(hijo->getPadre()!=NULL && hijo->getPadre()->getMarcado() == aux->getMarcado())
+				for(int i=0;i<vectorHijo.size();i++)
 				{
-					/*if(hijo->getMyr().zeros())
-					{
-						for(int i=0;i<vectorAux.size()-1;i++)
-						{
-							myfile[(i*2)+3]=vectorAux.get(i)+'0';
-							//myfile+=" ";
-						}
-					}*/
-					for(int i=0;i<vectorHijo.size();i++)
-					{
 
-						if(0)//hijo->getMyr().get(i) == 1 || aux->getMyr().get(i) == 1)
-						{
-							myfile+="w ";
-						}
-						else
-						{
-							myfile+=vectorHijo.get(i)+'0';
-							myfile+=" ";
-						}
-					}
-				}
-				else
-				{
-					for(int i=0;i<vectorHijo.size();i++)
+					if(hijo->getMarcado().get(i) == vector::OMEGA)
 					{
-						if(0)//aux->getMyr().get(i) == 1||hijo->getPadre()!=NULL&&(hijo->getPadre())->getMyr().get(i) == 1)
-						{
-							myfile+="w ";
-						}
-						else
-						{
-							myfile+=vectorHijo.get(i)+'0';
-							myfile+=" ";
-						}
+						myfile+="w ";
+					}
+					else
+					{
+						myfile+=vectorHijo.get(i)+'0';
+						myfile+=" ";
 					}
 				}
 				//myfile+=vectorHijo.get(vectorHijo.size()-1)+'0';
@@ -367,7 +350,7 @@ void Oraculo::doGraph()
 		}
 	}
 
-	while(myfile0.front()=="")
+	/*while(myfile0.front()=="")
 	{
 		if(myfile0.front()=="")
 		{
@@ -427,6 +410,7 @@ void Oraculo::doGraph()
 
 	}	
 	//}
+	*/
 
 
 	myfile="digraph G {\n";
@@ -440,19 +424,48 @@ void Oraculo::doGraph()
 	myfileout.close();
 	system("dot -Tpng grafo.dot -o grafo.png");
 	system("nohup display grafo.png &" );
+	system("dot -Tpng petri.dot -o petri.png");
+	system("nohup display petri.png &" );
 }
 
 bool Oraculo::findVivo()
 {
 	std::vector<_Nodos>::iterator i;
+	std::vector<_Nodos>::iterator j;
 	Nodo* aux;
+	Nodo *aux2;
 	for(i=nodos.begin();i!=nodos.end();i++)
 	{
-			aux = i->NODO;
-			if(!aux->getVivo())
+		aux = i->NODO;
+		if(!aux->getVivo())
+		{
+			for(j=nodos.begin();j!=nodos.end();j++)
 			{
-				return false;
+				aux2 = j->NODO;
+				if(aux->getMarcado() == aux2->getMarcado())
+				{
+					if(aux2->getVivo())
+						aux->setVivo(true);
+				}
 			}
+		}
+	}
+	for(i=nodos.begin();i!=nodos.end();i++)
+	{
+		aux = i->NODO;
+		std::cout<<"M[";
+		arbol::imprimirVec(aux->getMarcado());
+		std::cout<<"] d>>> "<<aux->getVivo();
+		std::cout<<"\t(dd) << ";
+		arbol::imprimirVec(aux->getDisparos());
+		std::cout<<std::endl;
+	}
+	for(i=nodos.begin();i!=nodos.end();i++)
+	{
+		if(!aux->getVivo())
+		{
+			return false;
+		}
 	}
 	return true;
 }

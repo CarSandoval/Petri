@@ -34,6 +34,7 @@ class arbol
         void check_t(Nodo* nodo);
         //void prueba(Nodo* arr[]);
 
+    void doPetri(vector,vector);
     bool reiniciableAux(Nodo* aux);
     bool reiniciable();
     bool vivacidadAux(Nodo* nodo);

@@ -118,9 +118,9 @@ vector& vector::operator+(const vector &v1)
 	for(int i=0;i<tamano;i++)
 	{
 		resp->data[i]+=data[i];
-		if (resp->data[i]>200000)
+		if (resp->data[i]>OMEGA)
 		{
-			resp->data[i]=200000;
+			resp->data[i]=OMEGA;
 		}
 	}
 
@@ -134,6 +134,10 @@ vector& vector::operator-(const vector &v1)
 
 	for(int i=0;i<tamano;i++)
 	{
+		if(resp->data[i] == OMEGA)
+		{
+			continue;
+		}
 		resp->data[i]-=data[i];
 	}
 
@@ -149,9 +153,9 @@ void vector::operator+=(const vector &v1)
 	for(int i=0;i<tamano && i<v1.tamano;i++)
 	{
 		data[i]+= v1.data[i];
-		if (data[i]>200000)
+		if (data[i]>OMEGA)
 		{
-			data[i]=200000;
+			data[i]=OMEGA;
 		}
 	}
 
@@ -162,6 +166,10 @@ void vector::operator-=(const vector &v1)
 
 	for(int i=0;i<tamano && i<v1.tamano;i++)
 	{
+		if(data[i] == OMEGA)
+		{
+			continue;
+		}
 		data[i]-= v1.data[i];
 	}
 

@@ -1,0 +1,163 @@
+//RED01 (viva, acotada y reiniciable) -- funciona
+1 1
+1
+1
+1
+
+//RED02 (no-viva, acotada y no reiniciable)--no funciona el acotamiento
+2 2
+1 0
+1 0
+0 1
+0 1
+0 1
+
+
+//RED03 (viva, no acotada y no reiniciable) -- funciona
+4 3
+1 0 0 
+1 0 0
+1 0 0
+0 1 0
+0 0 1
+0 1 0
+0 0 2
+1 0 0
+1 0 0
+
+//RED04 (viva, no acotado y reiniciable) -- funciona
+2 1
+1
+1
+2
+2
+1
+
+
+//RED05 (viva, no-reiniciable, no-acotada)
+4 4
+1 0 0 0
+1 0 0 0
+0 1 0 0
+0 0 1 0
+0 0 0 1
+0 1 1 0
+1 0 0 0
+0 0 0 1
+0 0 1 0
+
+//RED06 (Viva, reiniciable, no-acotada)		NO FUNCIONO REINICIABILIDAD
+4 5
+1 0 0 1 0
+1 0 0 0 0
+0 1 0 0 0
+0 0 1 1 0
+0 0 0 0 1
+0 1 0 0 0
+1 0 1 0 0
+0 0 0 0 1
+0 0 0 1 0
+
+//RED07 (no-viva, no-reiniciable, no-acotada)
+3 3
+1 0 0
+1 0 0
+1 0 0
+0 1 1
+1 1 0
+0 1 1
+0 0 1
+
+//RED08 (no-viva, no-reiniciable, acotada)(TEST)
+5 3
+2 0 0
+1 0 0
+1 0 0
+0 1 0
+0 0 1
+0 1 1
+0 1 0
+0 0 1
+1 0 0
+1 0 0
+1 0 0
+
+//RED09 (viva, no-reiniciable, no-acotada)(TEST)
+5 3
+2 0 0
+1 0 0
+1 0 0
+0 1 0
+0 0 1
+0 1 1
+0 1 0
+0 0 1
+1 0 0
+1 0 0
+3 0 0
+
+//RED010 (viva, reiniciable, acotada)(TEST)
+5 3
+2 0 0
+1 0 0
+1 0 0
+0 1 0
+0 0 1
+0 1 1
+0 1 0
+0 0 1
+1 0 0
+1 0 0
+2 0 0
+
+//RED11 ()
+3 3
+1 0 0
+1 0 0
+1 0 0
+0 1 1
+1 1 0
+0 1 1
+0 0 1
+
+//RED12 (TEST)
+5 5
+1 0 0 0 0
+1 0 0 0 0
+0 1 0 0 0 
+0 0 1 0 0
+0 0 0 1 1
+0 0 0 1 0
+0 1 1 0 0
+0 0 0 1 0
+0 0 0 0 1
+1 0 0 0 0
+0 1 1 0 0
+
+//RED13 
+2 3
+1 0 1
+1 0 1
+1 3 0
+3 3 0
+2 0 2
+
+//RED14
+8 5
+1 0 0 0 0
+1 0 0 0 0
+0 1 0 0 0
+0 0 1 0 0
+0 1 0 0 0
+1 0 0 0 0
+0 0 0 1 0
+0 0 0 0 1
+0 0 0 1 0
+0 1 0 0 0
+0 0 1 0 0
+0 1 0 0 0
+1 0 0 0 0
+0 0 0 1 0
+0 0 0 0 1
+0 0 0 1 0
+1 0 0 0 0
